@@ -1,0 +1,49 @@
+{
+  "id": "motion_slow_push_in_001",
+  "type": "motion_pattern",
+  "category": "camera_motion",
+  "name": "Slow camera push-in",
+  "description": "Useful for premium product reveals, calm campaign videos, hero animations, and image-to-video prompts where the subject should feel important without fast movement.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "product_video",
+    "campaign_video"
+  ],
+  "not_recommended_for": [
+    "fast_action_scene",
+    "dance_video",
+    "rapid_transition_sequence"
+  ],
+  "prompt_fragments": {
+    "generic": "slow camera push-in, calm controlled motion, stable subject, smooth premium pacing"
+  },
+  "parameters": {
+    "camera_motion": "slow push-in",
+    "motion_intensity": "low",
+    "pacing": "calm"
+  },
+  "compatible_with": [
+    "premium",
+    "product",
+    "enterprise",
+    "calm",
+    "hero"
+  ],
+  "avoid_with": [
+    "fast_motion",
+    "chaotic",
+    "handheld_shaky"
+  ],
+  "tags": [
+    "video",
+    "motion",
+    "push-in",
+    "premium",
+    "calm"
+  ],
+  "quality_score": 0.89,
+  "status": "active",
+  "created_by": "starter_bundle",
+  "version": "1.0"
+}

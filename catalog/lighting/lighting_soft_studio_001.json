@@ -1,0 +1,45 @@
+{
+  "id": "lighting_soft_studio_001",
+  "type": "lighting_pattern",
+  "category": "studio",
+  "name": "Soft studio lighting",
+  "description": "Gentle highlights, clean shadows, polished product photography feel.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "soft studio lighting, gentle highlights, clean shadows, polished product photography feel"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "product",
+    "enterprise",
+    "portrait"
+  ],
+  "avoid_with": [
+    "harsh_flash",
+    "neon",
+    "noir"
+  ],
+  "tags": [
+    "lighting",
+    "studio",
+    "soft",
+    "clean",
+    "premium"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

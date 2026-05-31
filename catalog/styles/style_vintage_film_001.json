@@ -1,0 +1,40 @@
+{
+  "id": "style_vintage_film_001",
+  "type": "style_pattern",
+  "category": "vintage_film",
+  "name": "Vintage film aesthetic",
+  "description": "Warm grain, faded color, soft contrast, evokes 1970s-80s film photography.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "vintage film aesthetic, warm grain, faded color palette, soft contrast, gentle highlight roll-off, 1970s film photography mood"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "nostalgic",
+    "editorial"
+  ],
+  "avoid_with": [
+    "sci-fi",
+    "neon"
+  ],
+  "tags": [
+    "vintage",
+    "film",
+    "warm",
+    "nostalgic"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

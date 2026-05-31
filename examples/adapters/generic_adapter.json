@@ -1,0 +1,49 @@
+{
+  "model_id": "generic",
+  "display_name": "Generic (model-neutral)",
+  "adapter_status": "default",
+  "supports": {
+    "static_image": true,
+    "image_editing": true,
+    "text_to_video": true,
+    "image_to_video": true,
+    "storyboard": true,
+    "keyframe": true
+  },
+  "parameters": {
+    "aspect_ratio": { "supported": true, "syntax": "aspect ratio: {value}" },
+    "aspect_ratio_hint": { "supported": true, "syntax": "aspect ratio hint: {value}" },
+    "duration_seconds": { "supported": true, "syntax": "duration: {value}s" },
+    "shot_count": { "supported": true, "syntax": "shot count: {value}" },
+
+    "camera_motion": { "supported": true, "syntax": "camera motion: {value}" },
+    "subject_motion": { "supported": true, "syntax": "subject motion: {value}" },
+    "motion_intensity": { "supported": true, "syntax": "motion intensity: {value}" },
+    "pacing": { "supported": true, "syntax": "pacing: {value}" },
+    "continuity": { "supported": true, "syntax": "continuity: {value}" },
+    "artifact_avoidance": { "supported": true, "syntax": "artifact avoidance: {value}" },
+
+    "lens": { "supported": true, "syntax": "lens: {value}" },
+    "depth_of_field": { "supported": true, "syntax": "depth of field: {value}" },
+    "framing": { "supported": true, "syntax": "framing: {value}" },
+    "angle": { "supported": true, "syntax": "angle: {value}" },
+    "composition": { "supported": true, "syntax": "composition: {value}" },
+    "lighting": { "supported": true, "syntax": "lighting: {value}" },
+    "shadow_style": { "supported": true, "syntax": "shadow style: {value}" },
+    "contrast": { "supported": true, "syntax": "contrast: {value}" },
+    "color_palette": { "supported": true, "syntax": "color palette: {value}" },
+    "style": { "supported": true, "syntax": "style: {value}" },
+    "mood": { "supported": true, "syntax": "mood: {value}" },
+    "subject": { "supported": true, "syntax": "subject: {value}" },
+    "realism": { "supported": true, "syntax": "realism: {value}" },
+    "brand_safety": { "supported": true, "syntax": "brand safety: {value}" },
+
+    "negative_prompt": { "supported": true, "syntax": "avoid: {value}" },
+    "reference_image": { "supported": true, "syntax": "reference: {value}" }
+  },
+  "prompt_style": "structured_natural_language",
+  "negative_prompt_behavior": "separate_avoid_section",
+  "unsupported_fields_behavior": "convert_to_text",
+  "language": "any",
+  "notes": "Default adapter used when no specific model is selected. Emits a model-neutral structured prompt that any major image or video model can consume with minor adjustment."
+}

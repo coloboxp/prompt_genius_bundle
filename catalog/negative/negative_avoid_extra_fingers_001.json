@@ -1,0 +1,33 @@
+{
+  "id": "negative_avoid_extra_fingers_001",
+  "type": "negative_pattern",
+  "category": "anatomy",
+  "name": "Avoid anatomical errors",
+  "description": "Prevents extra fingers, distorted hands, malformed limbs.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "image_to_video",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "no extra fingers, no distorted hands, no malformed limbs, anatomically correct"
+  },
+  "parameters": {},
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "negative",
+    "anatomy",
+    "hands"
+  ],
+  "quality_score": 0.85,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

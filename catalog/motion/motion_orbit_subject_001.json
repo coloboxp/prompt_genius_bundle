@@ -1,0 +1,39 @@
+{
+  "id": "motion_orbit_subject_001",
+  "type": "motion_pattern",
+  "category": "camera_motion",
+  "name": "Orbit around subject",
+  "description": "Smooth orbit around a centered subject, preserves identity and product shape.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "smooth orbit around subject, preserve identity and product shape, even pacing"
+  },
+  "parameters": {
+    "camera_motion": "orbit",
+    "motion_intensity": "medium"
+  },
+  "compatible_with": [
+    "product_video",
+    "3d_render"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "motion",
+    "orbit",
+    "product"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

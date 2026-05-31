@@ -1,0 +1,43 @@
+{
+  "id": "lighting_golden_hour_001",
+  "type": "lighting_pattern",
+  "category": "outdoor",
+  "name": "Golden hour outdoor",
+  "description": "Warm low-angle sunlight, long shadows, rich color, ideal for lifestyle and brand stories.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "golden hour sunlight, warm low-angle light, long soft shadows, rich color palette"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "lifestyle",
+    "campaign",
+    "outdoor"
+  ],
+  "avoid_with": [
+    "noir",
+    "studio_only"
+  ],
+  "tags": [
+    "lighting",
+    "golden_hour",
+    "warm",
+    "outdoor"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

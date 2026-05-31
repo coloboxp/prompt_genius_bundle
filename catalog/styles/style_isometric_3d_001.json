@@ -1,0 +1,39 @@
+{
+  "id": "style_isometric_3d_001",
+  "type": "style_pattern",
+  "category": "isometric_illustration",
+  "name": "Isometric 3D scene",
+  "description": "Clean isometric 3D illustration suited for product diagrams, UI hero scenes, infographics.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "clean isometric 3D illustration, soft shadows, pastel palette, precise geometry, infographic-friendly composition"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "technical",
+    "saas",
+    "explainer"
+  ],
+  "avoid_with": [
+    "photorealistic",
+    "portrait"
+  ],
+  "tags": [
+    "isometric",
+    "3d",
+    "infographic",
+    "diagram"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

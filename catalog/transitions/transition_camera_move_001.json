@@ -1,0 +1,32 @@
+{
+  "id": "transition_camera_move_001",
+  "type": "transition_pattern",
+  "category": "camera_move",
+  "name": "Camera-move transition",
+  "description": "Continuous camera motion that bridges two shots without a hard cut.",
+  "applies_to": [
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "continuous camera move bridging shots, no hard cut, preserves spatial continuity"
+  },
+  "parameters": {
+    "transition": "camera_move"
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "transition",
+    "camera_move"
+  ],
+  "quality_score": 0.72,
+  "status": "draft",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

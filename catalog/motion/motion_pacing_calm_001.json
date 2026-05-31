@@ -1,0 +1,35 @@
+{
+  "id": "motion_pacing_calm_001",
+  "type": "motion_pattern",
+  "category": "pacing",
+  "name": "Calm pacing",
+  "description": "Smooth premium pacing for brand-safe content.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "calm pacing, smooth premium rhythm, brand-safe tempo"
+  },
+  "parameters": {
+    "pacing": "calm"
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "motion",
+    "pacing",
+    "calm"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

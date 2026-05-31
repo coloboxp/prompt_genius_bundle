@@ -1,0 +1,39 @@
+{
+  "id": "motion_static_locked_001",
+  "type": "motion_pattern",
+  "category": "camera_motion",
+  "name": "Static locked camera",
+  "description": "Camera does not move; motion comes from subject and lighting only.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "static locked camera, no camera movement, motion comes from subject and lighting only"
+  },
+  "parameters": {
+    "camera_motion": "static",
+    "motion_intensity": "none"
+  },
+  "compatible_with": [
+    "interview",
+    "ui_animation"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "motion",
+    "static",
+    "locked"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

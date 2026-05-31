@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internal.example/schemas/model-adapter.schema.json",
+  "title": "Prompt Genius Model Adapter",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "model_id",
+    "display_name",
+    "supports",
+    "parameters",
+    "prompt_style",
+    "unsupported_fields_behavior"
+  ],
+  "properties": {
+    "model_id": {
+      "type": "string"
+    },
+    "display_name": {
+      "type": "string"
+    },
+    "supports": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "boolean"
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "supported"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "supported": {
+            "type": "boolean"
+          },
+          "syntax": {
+            "type": "string"
+          },
+          "allowed_values": {
+            "type": "array",
+            "items": {
+              "type": [
+                "string",
+                "number",
+                "boolean"
+              ]
+            }
+          },
+          "min": {
+            "type": "number"
+          },
+          "max": {
+            "type": "number"
+          }
+        }
+      }
+    },
+    "prompt_style": {
+      "type": "string"
+    },
+    "negative_prompt_behavior": {
+      "type": "string"
+    },
+    "unsupported_fields_behavior": {
+      "type": "string",
+      "enum": [
+        "error",
+        "ignore",
+        "drop",
+        "convert_to_text"
+      ]
+    },
+    "adapter_status": {
+      "type": "string",
+      "enum": [
+        "default",
+        "verified_from_corpus",
+        "stub_unverified",
+        "deprecated"
+      ],
+      "description": "Confidence level of the adapter definition. Stubs must be confirmed against the real model before production use."
+    },
+    "language": {
+      "type": "string",
+      "description": "Preferred prompt language (e.g. english_preferred, english_or_chinese, any)."
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

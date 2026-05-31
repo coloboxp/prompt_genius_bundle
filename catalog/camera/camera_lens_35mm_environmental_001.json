@@ -1,0 +1,42 @@
+{
+  "id": "camera_lens_35mm_environmental_001",
+  "type": "camera_pattern",
+  "category": "lens",
+  "name": "35mm environmental lens",
+  "description": "Subject in context with natural environmental framing.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "35mm lens, environmental framing, subject in context, natural perspective"
+  },
+  "parameters": {
+    "lens": "35mm",
+    "depth_of_field": "medium"
+  },
+  "compatible_with": [
+    "documentary",
+    "lifestyle"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "lens",
+    "35mm",
+    "environmental",
+    "documentary"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

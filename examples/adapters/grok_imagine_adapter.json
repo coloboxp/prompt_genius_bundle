@@ -1,0 +1,32 @@
+{
+  "model_id": "grok_imagine",
+  "display_name": "Grok Imagine",
+  "adapter_status": "stub_unverified",
+  "supports": {
+    "static_image": true,
+    "image_editing": true,
+    "text_to_video": true,
+    "image_to_video": true,
+    "storyboard": true,
+    "keyframe": true
+  },
+  "parameters": {
+    "aspect_ratio": {
+      "supported": true,
+      "syntax": "aspect ratio: {value}"
+    },
+    "negative_prompt": {
+      "supported": true,
+      "syntax": "avoid: {value}"
+    },
+    "reference_image": {
+      "supported": true,
+      "syntax": "reference: {value}"
+    }
+  },
+  "prompt_style": "detailed_natural_language",
+  "negative_prompt_behavior": "append_avoid_sentence",
+  "unsupported_fields_behavior": "drop",
+  "language": "english_preferred",
+  "notes": "Auto-generated stub adapter created during ingest of 'grok_imagine' prompts. Tighten the parameter whitelist and prompt_style after confirming the model's real grammar."
+}

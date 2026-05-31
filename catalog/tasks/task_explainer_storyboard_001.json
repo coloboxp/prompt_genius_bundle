@@ -1,0 +1,35 @@
+{
+  "id": "task_explainer_storyboard_001",
+  "type": "task_template",
+  "category": "explainer_storyboard",
+  "name": "Explainer video storyboard",
+  "description": "Short explainer video storyboard with opening, detail, reveal, closing shots.",
+  "applies_to": [
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "explainer video storyboard: opening shot, detail shot, reveal shot, closing brand frame"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "product",
+    "saas",
+    "campaign"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "task",
+    "explainer",
+    "storyboard"
+  ],
+  "quality_score": 0.8,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

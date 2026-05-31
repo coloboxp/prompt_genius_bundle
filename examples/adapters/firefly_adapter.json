@@ -1,0 +1,27 @@
+{
+  "model_id": "firefly",
+  "display_name": "Adobe Firefly",
+  "adapter_status": "stub_unverified",
+  "supports": {
+    "static_image": true,
+    "image_editing": true,
+    "text_to_video": false,
+    "image_to_video": false,
+    "storyboard": false,
+    "keyframe": false
+  },
+  "parameters": {
+    "aspect_ratio": { "supported": true, "syntax": "natural_language" },
+    "style_reference": { "supported": true, "syntax": "style reference: {value}" },
+    "content_credentials": { "supported": true, "syntax": "content credentials enabled" },
+    "negative_prompt": { "supported": true, "syntax": "avoid: {value}" },
+    "duration_seconds": { "supported": false },
+    "camera_motion": { "supported": false },
+    "subject_motion": { "supported": false }
+  },
+  "prompt_style": "concise_descriptive",
+  "negative_prompt_behavior": "append_avoid_sentence",
+  "unsupported_fields_behavior": "drop",
+  "language": "english_preferred",
+  "notes": "Stub adapter. Confirm current Firefly parameter support, style-reference grammar, and content-credentials behavior before production use."
+}

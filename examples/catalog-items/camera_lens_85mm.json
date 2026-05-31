@@ -1,0 +1,50 @@
+{
+  "id": "camera_lens_85mm_portrait_001",
+  "type": "camera_pattern",
+  "category": "lens",
+  "name": "85mm premium portrait lens",
+  "description": "Useful for premium portrait-style images, shallow depth of field, elegant subject separation, and human-centered brand visuals.",
+  "applies_to": [
+    "static_image",
+    "image_to_video",
+    "product_campaign",
+    "human_subject"
+  ],
+  "not_recommended_for": [
+    "wide_environment_scene",
+    "isometric_ui",
+    "flat_icon",
+    "technical_diagram"
+  ],
+  "prompt_fragments": {
+    "generic": "85mm lens, shallow depth of field, elegant subject separation, premium portrait photography"
+  },
+  "parameters": {
+    "lens": "85mm",
+    "depth_of_field": "shallow",
+    "framing": "portrait"
+  },
+  "compatible_with": [
+    "premium",
+    "human",
+    "trustworthy",
+    "editorial",
+    "campaign"
+  ],
+  "avoid_with": [
+    "wide_angle",
+    "flat_ui",
+    "technical_schema"
+  ],
+  "tags": [
+    "lens",
+    "85mm",
+    "portrait",
+    "premium",
+    "depth-of-field"
+  ],
+  "quality_score": 0.86,
+  "status": "active",
+  "created_by": "starter_bundle",
+  "version": "1.0"
+}

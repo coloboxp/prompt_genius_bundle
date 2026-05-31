@@ -1,0 +1,36 @@
+{
+  "id": "camera_angle_low_hero_001",
+  "type": "camera_pattern",
+  "category": "angle",
+  "name": "Low hero angle",
+  "description": "Slight low angle for hero subject impact without distorting the figure.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "image_to_video",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "slight low angle, hero framing, subject made prominent without distortion"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "product_hero",
+    "portrait"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "angle",
+    "low",
+    "hero"
+  ],
+  "quality_score": 0.72,
+  "status": "draft",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

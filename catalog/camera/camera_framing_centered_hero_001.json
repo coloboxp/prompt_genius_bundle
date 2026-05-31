@@ -1,0 +1,35 @@
+{
+  "id": "camera_framing_centered_hero_001",
+  "type": "camera_pattern",
+  "category": "framing",
+  "name": "Centered hero framing",
+  "description": "Subject centered with deliberate negative space for headline copy.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "centered hero framing, deliberate negative space for headline text, balanced composition"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "hero_image",
+    "landing_page"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "framing",
+    "centered",
+    "hero",
+    "negative_space"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

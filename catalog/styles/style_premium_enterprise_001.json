@@ -1,0 +1,47 @@
+{
+  "id": "style_premium_enterprise_001",
+  "type": "style_pattern",
+  "category": "enterprise_brand_style",
+  "name": "Premium enterprise visual",
+  "description": "Trustworthy, calm, modern B2B aesthetic for identity, security, fintech, SaaS, product launches.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "premium enterprise visual style, calm trust-focused mood, clean modern B2B aesthetic, refined details, professional finish"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "b2b",
+    "identity",
+    "security",
+    "fintech",
+    "saas"
+  ],
+  "avoid_with": [
+    "cyberpunk",
+    "chaotic",
+    "glitch_heavy"
+  ],
+  "tags": [
+    "premium",
+    "enterprise",
+    "b2b",
+    "trust",
+    "clean"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "motion_handheld_subtle_001",
+  "type": "motion_pattern",
+  "category": "camera_motion",
+  "name": "Subtle handheld",
+  "description": "Light handheld breathing for documentary realism without distracting shake.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "subtle handheld camera, light breathing motion, documentary realism, no distracting shake"
+  },
+  "parameters": {
+    "camera_motion": "handheld",
+    "motion_intensity": "low"
+  },
+  "compatible_with": [
+    "documentary",
+    "lifestyle"
+  ],
+  "avoid_with": [
+    "product_render"
+  ],
+  "tags": [
+    "motion",
+    "handheld",
+    "documentary"
+  ],
+  "quality_score": 0.72,
+  "status": "draft",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

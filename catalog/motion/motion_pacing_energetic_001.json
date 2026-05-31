@@ -1,0 +1,35 @@
+{
+  "id": "motion_pacing_energetic_001",
+  "type": "motion_pattern",
+  "category": "pacing",
+  "name": "Energetic pacing",
+  "description": "Faster cuts and motion intensity for upbeat campaign content.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "energetic pacing, faster cuts, higher motion intensity, upbeat campaign rhythm"
+  },
+  "parameters": {
+    "pacing": "energetic"
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "motion",
+    "pacing",
+    "energetic"
+  ],
+  "quality_score": 0.72,
+  "status": "draft",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

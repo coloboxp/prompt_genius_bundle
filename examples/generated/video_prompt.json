@@ -1,0 +1,50 @@
+{
+  "id": "generated_video_2026_05_30_001",
+  "mode": "image_to_video",
+  "title": "Premium onboarding hero animation",
+  "target_model": "generic",
+  "user_brief": "Animate this product visual with premium enterprise motion.",
+  "source_assets": [
+    {
+      "type": "image",
+      "role": "start_frame",
+      "description": "Static product hero image"
+    }
+  ],
+  "creative_intent": {
+    "subject": "secure biometric onboarding product",
+    "mood": [
+      "premium",
+      "calm",
+      "trustworthy"
+    ],
+    "audience": "enterprise buyers",
+    "use_case": "LinkedIn product launch video"
+  },
+  "video_parameters": {
+    "duration_seconds": 6,
+    "aspect_ratio": "16:9",
+    "shot_count": 1,
+    "camera_motion": "slow push-in",
+    "subject_motion": "subtle UI glow and gentle depth movement",
+    "lighting_motion": "soft gradient shift",
+    "pacing": "calm and controlled",
+    "continuity": [
+      "preserve product shape",
+      "preserve layout",
+      "avoid changing brand colors"
+    ]
+  },
+  "prompt": "Create a 6-second premium enterprise product animation based on the provided start frame. Use a slow camera push-in, subtle UI glow, and soft gradient lighting movement. Preserve the product shape, layout, and brand colors. The motion should feel calm, polished, and suitable for a LinkedIn product launch.",
+  "negative_prompt": "Avoid fast motion, sci-fi effects, unstable geometry, glitch effects, fake text, distorted UI, excessive glow, camera shake, and flicker.",
+  "evaluation_criteria": [
+    "Motion is smooth and stable",
+    "Product remains recognizable",
+    "Feels premium and brand-safe",
+    "No distracting artifacts"
+  ],
+  "metadata": {
+    "created_by": "starter_bundle",
+    "version": "1.0"
+  }
+}

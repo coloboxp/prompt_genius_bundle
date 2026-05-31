@@ -1,0 +1,50 @@
+{
+  "id": "generated_static_2026_05_30_001",
+  "mode": "static_image",
+  "title": "Premium biometric onboarding hero image",
+  "target_model": "generic",
+  "user_brief": "Create a premium enterprise hero image for a biometric onboarding platform.",
+  "selected_patterns": [
+    "style_enterprise_trust_001",
+    "lighting_soft_studio_001",
+    "negative_avoid_cyberpunk_001"
+  ],
+  "creative_intent": {
+    "subject": "biometric onboarding platform",
+    "audience": "enterprise buyers",
+    "mood": [
+      "trustworthy",
+      "premium",
+      "human",
+      "clean"
+    ],
+    "style": "modern enterprise visual",
+    "brand_safety": "high"
+  },
+  "visual_parameters": {
+    "aspect_ratio": "16:9",
+    "composition": "clean hero layout with negative space",
+    "camera": {
+      "lens": "50mm",
+      "angle": "slight three-quarter view",
+      "framing": "medium-wide"
+    },
+    "lighting": "soft studio lighting",
+    "color_palette": "deep blue, white, soft gray",
+    "realism": "semi-realistic"
+  },
+  "video_parameters": null,
+  "prompt": "Create a premium enterprise hero image for a biometric onboarding platform. The visual should feel trustworthy, human, clean, and production-ready. Use a modern B2B aesthetic, soft studio lighting, refined details, and a clean hero composition with negative space for headline text. Keep the mood calm and credible, suitable for a landing page hero section.",
+  "negative_prompt": "Avoid cyberpunk, hacker visuals, surveillance feeling, dystopian lighting, glitch effects, aggressive neon, fake UI text, and stock photo handshakes.",
+  "evaluation_criteria": [
+    "Feels trustworthy and enterprise-ready",
+    "Suitable for landing page hero",
+    "Does not look dystopian",
+    "Does not look like generic AI stock art"
+  ],
+  "status": "draft",
+  "metadata": {
+    "created_by": "starter_bundle",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "model_id": "chatgpt_image",
+  "display_name": "ChatGPT / GPT Image",
+  "adapter_status": "stub_unverified",
+  "supports": {
+    "static_image": true,
+    "image_editing": true,
+    "text_to_video": false,
+    "image_to_video": false,
+    "storyboard": false,
+    "keyframe": false
+  },
+  "parameters": {
+    "aspect_ratio": { "supported": true, "syntax": "natural_language" },
+    "reference_image": { "supported": true, "syntax": "natural_language_reference" },
+    "transparent_background": { "supported": true, "syntax": "natural_language" },
+    "negative_prompt": { "supported": true, "syntax": "trailing_avoid_sentence" },
+    "duration_seconds": { "supported": false },
+    "camera_motion": { "supported": false },
+    "subject_motion": { "supported": false }
+  },
+  "prompt_style": "conversational_natural_language",
+  "negative_prompt_behavior": "append_avoid_sentence",
+  "unsupported_fields_behavior": "drop",
+  "language": "english_preferred",
+  "notes": "Stub adapter. Confirm current GPT Image parameter support and conversational prompting conventions before production use."
+}

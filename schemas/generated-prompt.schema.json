@@ -1,0 +1,94 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internal.example/schemas/generated-prompt.schema.json",
+  "title": "Prompt Genius Generated Prompt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "mode",
+    "title",
+    "target_model",
+    "user_brief",
+    "selected_patterns",
+    "creative_intent",
+    "prompt",
+    "negative_prompt",
+    "evaluation_criteria",
+    "status"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "static_image",
+        "image_editing",
+        "text_to_video",
+        "image_to_video",
+        "storyboard"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "target_model": {
+      "type": "string",
+      "description": "Adapter id (e.g. nano_banana_pro, seedance_2_0, firefly, chatgpt_image, runway, midjourney, generic). Open-ended on purpose: new adapters can be added without a schema change."
+    },
+    "user_brief": {
+      "type": "string"
+    },
+    "selected_patterns": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "creative_intent": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "visual_parameters": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "video_parameters": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "additionalProperties": true
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "negative_prompt": {
+      "type": "string"
+    },
+    "evaluation_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "selected",
+        "exported",
+        "archived"
+      ]
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

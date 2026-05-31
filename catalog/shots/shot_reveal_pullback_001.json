@@ -1,0 +1,36 @@
+{
+  "id": "shot_reveal_pullback_001",
+  "type": "shot_pattern",
+  "category": "reveal",
+  "name": "Pull-back reveal",
+  "description": "Camera pulls back to reveal context or product in environment.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "pull-back reveal, camera retreats to expose subject in context"
+  },
+  "parameters": {
+    "shot_role": "reveal",
+    "duration_hint_seconds": 4
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "shot",
+    "reveal",
+    "pullback"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

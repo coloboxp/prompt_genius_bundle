@@ -1,0 +1,41 @@
+{
+  "id": "style_makoto_shinkai_anime_001",
+  "type": "style_pattern",
+  "category": "anime_cinematic",
+  "name": "Makoto Shinkai inspired anime",
+  "description": "Anime cinematic style, soft bloom, dreamy atmosphere, rich color, narrow detailed scenes.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "anime cinematic style inspired by Makoto Shinkai, soft bloom, dreamy atmosphere, narrow detailed scene, rich color palette, lens flare"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "dreamy",
+    "narrative",
+    "character"
+  ],
+  "avoid_with": [
+    "technical_diagram",
+    "ui_mockup"
+  ],
+  "tags": [
+    "anime",
+    "cinematic",
+    "dreamy",
+    "illustration"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "model_id": "runway",
+  "display_name": "Runway",
+  "adapter_status": "stub_unverified",
+  "supports": {
+    "static_image": false,
+    "image_editing": false,
+    "text_to_video": true,
+    "image_to_video": true,
+    "storyboard": true,
+    "keyframe": true
+  },
+  "parameters": {
+    "aspect_ratio": { "supported": true, "syntax": "aspect ratio: {value}" },
+    "duration_seconds": { "supported": true, "syntax": "duration: {value}s" },
+    "camera_motion": { "supported": true, "syntax": "camera motion: {value}" },
+    "subject_motion": { "supported": true, "syntax": "subject motion: {value}" },
+    "start_frame": { "supported": true, "syntax": "start frame: {value}" },
+    "end_frame": { "supported": true, "syntax": "end frame: {value}" },
+    "negative_prompt": { "supported": true, "syntax": "avoid: {value}" }
+  },
+  "prompt_style": "natural_language_motion",
+  "negative_prompt_behavior": "separate_avoid_section",
+  "unsupported_fields_behavior": "drop",
+  "language": "english_preferred",
+  "notes": "Stub adapter. Confirm current Runway Gen-N parameter support, start/end frame grammar, and motion field names before production use."
+}

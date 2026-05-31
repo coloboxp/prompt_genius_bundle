@@ -1,0 +1,43 @@
+{
+  "id": "motion_slow_push_in_001",
+  "type": "motion_pattern",
+  "category": "camera_motion",
+  "name": "Slow camera push-in",
+  "description": "Calm push-in that draws attention to the subject without losing layout.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "slow camera push-in, calm controlled motion, stable subject, smooth premium pacing"
+  },
+  "parameters": {
+    "camera_motion": "slow push-in",
+    "motion_intensity": "low"
+  },
+  "compatible_with": [
+    "product_video",
+    "hero_animation"
+  ],
+  "avoid_with": [
+    "fast_motion",
+    "shaky"
+  ],
+  "tags": [
+    "motion",
+    "push-in",
+    "calm",
+    "premium"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

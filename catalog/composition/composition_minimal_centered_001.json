@@ -1,0 +1,35 @@
+{
+  "id": "composition_minimal_centered_001",
+  "type": "composition_pattern",
+  "category": "minimal_centered",
+  "name": "Minimal centered subject",
+  "description": "Single subject centered in a minimal frame, generous breathing room.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "minimal centered composition, single subject, generous breathing room, calm balance"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "product",
+    "icon",
+    "brand"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "composition",
+    "minimal",
+    "centered"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

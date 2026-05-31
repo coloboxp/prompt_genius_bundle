@@ -1,0 +1,58 @@
+{
+  "id": "style_enterprise_trust_001",
+  "type": "style_pattern",
+  "category": "enterprise_brand_style",
+  "name": "Premium enterprise trust",
+  "description": "Useful for B2B, identity, security, fintech, SaaS, and product visuals that need to feel calm, credible, and production-ready.",
+  "applies_to": [
+    "static_image",
+    "text_to_video",
+    "image_to_video",
+    "campaign_visual"
+  ],
+  "not_recommended_for": [
+    "playful_children_brand",
+    "gaming_campaign",
+    "experimental_art"
+  ],
+  "prompt_fragments": {
+    "generic": "premium enterprise visual style, calm trust-focused mood, clean modern B2B aesthetic, refined details, professional finish"
+  },
+  "parameters": {
+    "style": "premium enterprise",
+    "mood": [
+      "trustworthy",
+      "calm",
+      "clean",
+      "professional"
+    ],
+    "brand_safety": "high"
+  },
+  "compatible_with": [
+    "b2b",
+    "identity",
+    "security",
+    "fintech",
+    "saas",
+    "clean",
+    "trust"
+  ],
+  "avoid_with": [
+    "cyberpunk",
+    "chaotic",
+    "horror",
+    "glitch_heavy"
+  ],
+  "tags": [
+    "premium",
+    "enterprise",
+    "trust",
+    "b2b",
+    "clean",
+    "brand-safe"
+  ],
+  "quality_score": 0.88,
+  "status": "active",
+  "created_by": "starter_bundle",
+  "version": "1.0"
+}

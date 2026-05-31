@@ -1,0 +1,44 @@
+{
+  "id": "camera_lens_85mm_portrait_001",
+  "type": "camera_pattern",
+  "category": "lens",
+  "name": "85mm portrait lens",
+  "description": "Shallow depth of field, elegant subject separation, premium portrait photography.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "image_to_video",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "85mm lens, shallow depth of field, elegant subject separation, premium portrait photography"
+  },
+  "parameters": {
+    "lens": "85mm",
+    "depth_of_field": "shallow"
+  },
+  "compatible_with": [
+    "portrait",
+    "premium",
+    "human"
+  ],
+  "avoid_with": [
+    "wide_environment",
+    "flat_ui"
+  ],
+  "tags": [
+    "lens",
+    "85mm",
+    "portrait",
+    "premium"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

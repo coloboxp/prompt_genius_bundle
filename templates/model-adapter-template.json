@@ -1,0 +1,28 @@
+{
+  "model_id": "example_model",
+  "display_name": "Example Model",
+  "supports": {
+    "static_image": true,
+    "image_editing": false,
+    "text_to_video": false,
+    "image_to_video": false,
+    "storyboard": false
+  },
+  "parameters": {
+    "aspect_ratio": {
+      "supported": true,
+      "syntax": "{value}"
+    },
+    "duration_seconds": {
+      "supported": false
+    },
+    "negative_prompt": {
+      "supported": true,
+      "syntax": "negative: {value}"
+    }
+  },
+  "prompt_style": "natural_language",
+  "negative_prompt_behavior": "separate_field",
+  "unsupported_fields_behavior": "convert_to_text",
+  "notes": "Replace with real target model behavior. Do not allow unsupported settings to be invented."
+}

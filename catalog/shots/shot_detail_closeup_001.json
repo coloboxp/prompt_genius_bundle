@@ -1,0 +1,36 @@
+{
+  "id": "shot_detail_closeup_001",
+  "type": "shot_pattern",
+  "category": "detail",
+  "name": "Detail close-up",
+  "description": "Tight close-up on a product detail or expression.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "tight close-up on a product detail or human expression, stable framing"
+  },
+  "parameters": {
+    "shot_role": "detail",
+    "duration_hint_seconds": 2
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "shot",
+    "closeup",
+    "detail"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

@@ -1,0 +1,129 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internal.example/schemas/catalog-item.schema.json",
+  "title": "Prompt Genius Catalog Item",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "type",
+    "category",
+    "name",
+    "description",
+    "applies_to",
+    "not_recommended_for",
+    "prompt_fragments",
+    "parameters",
+    "compatible_with",
+    "avoid_with",
+    "tags",
+    "quality_score",
+    "status",
+    "version"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 3
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "style_pattern",
+        "camera_pattern",
+        "lighting_pattern",
+        "composition_pattern",
+        "motion_pattern",
+        "shot_pattern",
+        "transition_pattern",
+        "negative_pattern",
+        "brand_pattern",
+        "model_setting",
+        "task_template",
+        "prompt_example",
+        "evaluation_rubric",
+        "adapter_rule"
+      ]
+    },
+    "category": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "applies_to": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "not_recommended_for": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "prompt_fragments": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "parameters": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "compatible_with": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "avoid_with": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "quality_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "draft",
+        "active",
+        "deprecated",
+        "archived"
+      ]
+    },
+    "created_by": {
+      "type": "string"
+    },
+    "updated_by": {
+      "type": "string"
+    },
+    "version": {
+      "type": "string"
+    },
+    "notes": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Provenance metadata: source CSV file, source row id, author, URL, derivation method."
+    }
+  }
+}

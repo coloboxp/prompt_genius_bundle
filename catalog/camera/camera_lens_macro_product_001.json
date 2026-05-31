@@ -1,0 +1,41 @@
+{
+  "id": "camera_lens_macro_product_001",
+  "type": "camera_pattern",
+  "category": "lens",
+  "name": "Macro product lens",
+  "description": "Macro focus on surface texture and product details.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "macro lens, close-up product detail, shallow depth of field focused on surface texture"
+  },
+  "parameters": {
+    "lens": "macro",
+    "depth_of_field": "very shallow"
+  },
+  "compatible_with": [
+    "product",
+    "skincare",
+    "jewelry"
+  ],
+  "avoid_with": [
+    "wide_environment"
+  ],
+  "tags": [
+    "lens",
+    "macro",
+    "product",
+    "detail"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

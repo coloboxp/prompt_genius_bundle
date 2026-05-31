@@ -1,0 +1,52 @@
+{
+  "model_id": "seedance_2_0",
+  "display_name": "Seedance 2.0",
+  "adapter_status": "verified_from_corpus",
+  "supports": {
+    "static_image": false,
+    "image_editing": false,
+    "text_to_video": true,
+    "image_to_video": true,
+    "storyboard": true
+  },
+  "parameters": {
+    "aspect_ratio": {
+      "supported": true,
+      "syntax": "aspect ratio: {value}"
+    },
+    "duration_seconds": {
+      "supported": true,
+      "syntax": "duration: {value}s",
+      "shot_timing_syntax": "（{start}-{end}秒）"
+    },
+    "camera_motion": {
+      "supported": true,
+      "syntax": "camera motion: {value}"
+    },
+    "subject_motion": {
+      "supported": true,
+      "syntax": "subject motion: {value}"
+    },
+    "pacing": {
+      "supported": true,
+      "syntax": "pacing: {value}"
+    },
+    "continuity": {
+      "supported": true,
+      "syntax": "continuity: {value}"
+    },
+    "negative_prompt": {
+      "supported": true,
+      "syntax": "avoid: {value}"
+    },
+    "reference_image": {
+      "supported": true,
+      "syntax": "参考图片{n}"
+    }
+  },
+  "prompt_style": "shot_structured_natural_language",
+  "negative_prompt_behavior": "separate_avoid_section",
+  "unsupported_fields_behavior": "drop",
+  "language": "english_or_chinese",
+  "notes": "Use for text-to-video, image-to-video, and storyboard. Confirmed shot-timing pattern `（0-Xs）` and `参考图片N` reference grammar from rows in raw_corpus/seedance-2-0-prompts-20260324.csv."
+}

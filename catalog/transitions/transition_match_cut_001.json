@@ -1,0 +1,32 @@
+{
+  "id": "transition_match_cut_001",
+  "type": "transition_pattern",
+  "category": "cut",
+  "name": "Match cut",
+  "description": "Match-cut transition aligning shape, motion, or color between two shots.",
+  "applies_to": [
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "match-cut transition aligning subject shape, motion vector, or color between shots"
+  },
+  "parameters": {
+    "transition": "match_cut"
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "transition",
+    "match_cut"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

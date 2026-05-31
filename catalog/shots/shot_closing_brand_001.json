@@ -1,0 +1,36 @@
+{
+  "id": "shot_closing_brand_001",
+  "type": "shot_pattern",
+  "category": "closing",
+  "name": "Closing brand frame",
+  "description": "Final brand-message frame with stable composition and space for copy.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "closing brand frame, stable composition with negative space for copy and logo"
+  },
+  "parameters": {
+    "shot_role": "closing",
+    "duration_hint_seconds": 3
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "shot",
+    "closing",
+    "brand"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

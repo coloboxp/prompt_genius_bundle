@@ -1,0 +1,31 @@
+{
+  "id": "task_product_render_001",
+  "type": "task_template",
+  "category": "product_render",
+  "name": "Product render",
+  "description": "Clean product render on a brand-safe background.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "clean product render, brand-safe background, premium commercial photography feel"
+  },
+  "parameters": {},
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "task",
+    "product",
+    "render"
+  ],
+  "quality_score": 0.78,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

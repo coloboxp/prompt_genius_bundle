@@ -1,0 +1,40 @@
+{
+  "id": "composition_environmental_wide_001",
+  "type": "composition_pattern",
+  "category": "wide_environment",
+  "name": "Environmental wide shot",
+  "description": "Subject embedded in a wider environment, contextual scale.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "environmental wide composition, subject embedded in surroundings, contextual scale, layered depth"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "narrative",
+    "lifestyle"
+  ],
+  "avoid_with": [
+    "macro_detail"
+  ],
+  "tags": [
+    "composition",
+    "wide",
+    "environment"
+  ],
+  "quality_score": 0.72,
+  "status": "draft",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

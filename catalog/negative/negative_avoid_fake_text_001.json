@@ -1,0 +1,35 @@
+{
+  "id": "negative_avoid_fake_text_001",
+  "type": "negative_pattern",
+  "category": "artifact_avoidance",
+  "name": "Avoid fake/garbled text",
+  "description": "Prevents the model from inventing unreadable or misspelled text in the output.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "no fake text, no garbled lettering, no misspelled words; if text is needed, leave readable placeholder"
+  },
+  "parameters": {},
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "negative",
+    "text",
+    "artifact"
+  ],
+  "quality_score": 0.88,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

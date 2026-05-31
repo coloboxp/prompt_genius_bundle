@@ -1,0 +1,37 @@
+{
+  "id": "style_eco_luxury_product_001",
+  "type": "style_pattern",
+  "category": "product_photography",
+  "name": "Eco-luxury product photography",
+  "description": "High-end commercial product photography with organic surroundings, dew, soft diffused light.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "high-end commercial product photography, organic eco-luxury aesthetic, dewy textures, soft diffused lighting, ultra-detailed surfaces, bright minimal background"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "skincare",
+    "beauty",
+    "wellness"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "product",
+    "eco",
+    "luxury",
+    "commercial",
+    "photography"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "id": "lighting_natural_window_001",
+  "type": "lighting_pattern",
+  "category": "natural",
+  "name": "Natural window light",
+  "description": "Soft directional daylight from a window, gentle falloff, realistic skin tones.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "image_to_video",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "natural window light, soft directional daylight, gentle falloff, realistic skin tones"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "portrait",
+    "lifestyle",
+    "interior"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "lighting",
+    "natural",
+    "window",
+    "daylight"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

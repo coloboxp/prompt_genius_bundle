@@ -1,0 +1,41 @@
+{
+  "id": "style_cinematic_editorial_001",
+  "type": "style_pattern",
+  "category": "editorial_cinematic",
+  "name": "Cinematic editorial photography",
+  "description": "Magazine-grade cinematic photography with shallow depth of field, deliberate composition, refined color.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "cinematic editorial photography style, deliberate composition, shallow depth of field, refined color grading, magazine-grade finish"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "fashion",
+    "campaign",
+    "lifestyle",
+    "portrait"
+  ],
+  "avoid_with": [
+    "flat_ui",
+    "icon"
+  ],
+  "tags": [
+    "cinematic",
+    "editorial",
+    "magazine",
+    "photography",
+    "premium"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

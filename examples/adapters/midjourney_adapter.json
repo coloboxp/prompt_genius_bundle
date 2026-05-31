@@ -1,0 +1,28 @@
+{
+  "model_id": "midjourney",
+  "display_name": "Midjourney",
+  "adapter_status": "stub_unverified",
+  "supports": {
+    "static_image": true,
+    "image_editing": false,
+    "text_to_video": false,
+    "image_to_video": false,
+    "storyboard": false,
+    "keyframe": false
+  },
+  "parameters": {
+    "aspect_ratio": { "supported": true, "syntax": "--ar {value}" },
+    "negative_prompt": { "supported": true, "syntax": "--no {value}" },
+    "stylize": { "supported": true, "syntax": "--s {value}" },
+    "version": { "supported": true, "syntax": "--v {value}" },
+    "raw_mode": { "supported": true, "syntax": "--style raw" },
+    "duration_seconds": { "supported": false },
+    "camera_motion": { "supported": false },
+    "subject_motion": { "supported": false }
+  },
+  "prompt_style": "compact_descriptive",
+  "negative_prompt_behavior": "parameterized_no_flag",
+  "unsupported_fields_behavior": "drop",
+  "language": "english_preferred",
+  "notes": "Stub adapter. Confirm current Midjourney version flag and supported parameters before production use."
+}

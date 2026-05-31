@@ -1,0 +1,36 @@
+{
+  "id": "task_landing_hero_image_001",
+  "type": "task_template",
+  "category": "hero_image",
+  "name": "Landing page hero image",
+  "description": "Static hero image for a product landing page with space for headline and CTA.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "landing page hero image, premium production-ready visual with clear negative space for headline and CTA"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "b2b",
+    "saas",
+    "campaign"
+  ],
+  "avoid_with": [],
+  "tags": [
+    "task",
+    "hero",
+    "landing",
+    "marketing"
+  ],
+  "quality_score": 0.78,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

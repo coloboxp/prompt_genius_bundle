@@ -1,0 +1,38 @@
+{
+  "id": "motion_continuity_preserve_face_001",
+  "type": "motion_pattern",
+  "category": "continuity",
+  "name": "Preserve face continuity",
+  "description": "Continuity constraint: subject face and identity stay consistent across frames.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "preserve subject face and identity across frames; consistent features, no morphing"
+  },
+  "parameters": {
+    "continuity": [
+      "preserve_face",
+      "preserve_identity"
+    ]
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "continuity",
+    "face",
+    "identity"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

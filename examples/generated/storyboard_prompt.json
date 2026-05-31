@@ -1,0 +1,61 @@
+{
+  "id": "storyboard_2026_05_30_001",
+  "title": "Identity verification product concept video",
+  "target_model": "generic",
+  "user_brief": "Create a 15-second product concept video for identity verification.",
+  "total_duration_seconds": 15,
+  "aspect_ratio": "16:9",
+  "shots": [
+    {
+      "shot_number": 1,
+      "duration_seconds": 3,
+      "description": "Calm opening with a person using a phone in a clean environment.",
+      "camera_motion": "slow push-in",
+      "subject_motion": "subtle natural hand movement",
+      "transition_to_next": "soft cut",
+      "prompt": "A calm opening shot of a person using a phone in a clean modern environment. Premium enterprise mood, soft studio lighting, trustworthy and human. Slow camera push-in.",
+      "negative_prompt": "Avoid fake text, cyberpunk visuals, harsh neon, and dramatic surveillance feeling."
+    },
+    {
+      "shot_number": 2,
+      "duration_seconds": 4,
+      "description": "Smooth identity scan visualization with clean abstract UI elements.",
+      "camera_motion": "stable close-up",
+      "subject_motion": "subtle scanning highlight",
+      "transition_to_next": "match cut",
+      "prompt": "A clean abstract identity scan visualization on a mobile device, subtle scanning highlight, premium enterprise UI style, calm and credible motion.",
+      "negative_prompt": "Avoid hacker UI, glitch effects, fake unreadable text, and aggressive sci-fi elements."
+    },
+    {
+      "shot_number": 3,
+      "duration_seconds": 4,
+      "description": "Secure approval moment represented with a calm confirmation visual.",
+      "camera_motion": "small dolly movement",
+      "subject_motion": "gentle confirmation animation",
+      "transition_to_next": "soft fade",
+      "prompt": "A secure approval moment shown with a clean confirmation visual, calm animation, soft blue and white palette, professional B2B style.",
+      "negative_prompt": "Avoid loud effects, exaggerated lock icons, cyberpunk lighting, and unstable UI."
+    },
+    {
+      "shot_number": 4,
+      "duration_seconds": 4,
+      "description": "Product UI and brand message frame with space for copy.",
+      "camera_motion": "static with slight depth movement",
+      "subject_motion": "subtle background movement",
+      "transition_to_next": "end frame",
+      "prompt": "Final product UI hero frame with clean negative space for brand message, premium enterprise style, soft studio lighting, stable composition.",
+      "negative_prompt": "Avoid fake text, clutter, excessive glow, and unstable geometry."
+    }
+  ],
+  "global_negative_prompt": "Avoid cyberpunk, hacker visuals, surveillance feeling, glitch effects, fake text, unstable geometry, flicker, and excessive glow.",
+  "evaluation_criteria": [
+    "Story is clear in 15 seconds",
+    "Visuals feel premium and trustworthy",
+    "Motion is stable and calm",
+    "Each shot has a clear role"
+  ],
+  "metadata": {
+    "created_by": "starter_bundle",
+    "version": "1.0"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "id": "composition_rule_of_thirds_001",
+  "type": "composition_pattern",
+  "category": "rule_of_thirds",
+  "name": "Rule of thirds",
+  "description": "Subject placed on a third intersection for natural balance.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "rule of thirds composition, subject placed on a third intersection, balanced negative space"
+  },
+  "parameters": {},
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "composition",
+    "thirds",
+    "balance"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

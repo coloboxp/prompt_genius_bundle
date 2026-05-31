@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internal.example/schemas/storyboard.schema.json",
+  "title": "Prompt Genius Storyboard",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "title",
+    "target_model",
+    "user_brief",
+    "total_duration_seconds",
+    "shots"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "target_model": {
+      "type": "string",
+      "description": "Adapter id for any video-capable model that supports storyboard or scene-by-scene generation."
+    },
+    "user_brief": {
+      "type": "string"
+    },
+    "total_duration_seconds": {
+      "type": "number",
+      "minimum": 1
+    },
+    "aspect_ratio": {
+      "type": "string"
+    },
+    "shots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "shot_number",
+          "duration_seconds",
+          "description",
+          "prompt"
+        ],
+        "additionalProperties": true,
+        "properties": {
+          "shot_number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "duration_seconds": {
+            "type": "number",
+            "minimum": 1
+          },
+          "description": {
+            "type": "string"
+          },
+          "camera_motion": {
+            "type": "string"
+          },
+          "subject_motion": {
+            "type": "string"
+          },
+          "transition_to_next": {
+            "type": "string"
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "negative_prompt": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "global_negative_prompt": {
+      "type": "string"
+    },
+    "evaluation_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "id": "lighting_dramatic_low_key_001",
+  "type": "lighting_pattern",
+  "category": "dramatic",
+  "name": "Dramatic low-key lighting",
+  "description": "High-contrast directional lighting with deep shadows for dramatic mood.",
+  "applies_to": [
+    "static_image",
+    "image_editing",
+    "text_to_video",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "dramatic low-key lighting, high contrast, deep shadows, strong key light, moody atmosphere"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "editorial",
+    "fashion",
+    "noir"
+  ],
+  "avoid_with": [
+    "clean_enterprise",
+    "infographic"
+  ],
+  "tags": [
+    "lighting",
+    "dramatic",
+    "low_key",
+    "moody"
+  ],
+  "quality_score": 0.72,
+  "status": "draft",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "id": "motion_continuity_preserve_product_001",
+  "type": "motion_pattern",
+  "category": "continuity",
+  "name": "Preserve product continuity",
+  "description": "Continuity constraint: product shape, color, and logo remain stable across frames.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "preserve product shape, color, and logo across frames; no geometry drift"
+  },
+  "parameters": {
+    "continuity": [
+      "preserve_product_shape",
+      "preserve_logo",
+      "preserve_color"
+    ]
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "continuity",
+    "product",
+    "stability"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

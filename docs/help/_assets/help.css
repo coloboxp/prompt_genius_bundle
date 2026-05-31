@@ -1,0 +1,139 @@
+/* Apple Help Book stylesheet — mirrors HIG-ish help look,
+   works in Help Viewer and QTextBrowser fallback. */
+
+:root {
+  --fg: #1d1d1f;
+  --muted: #6e6e73;
+  --link: #0066cc;
+  --rule: #d2d2d7;
+  --bg: #ffffff;
+  --code-bg: #f5f5f7;
+  --accent: #0a84ff;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --fg: #f5f5f7;
+    --muted: #98989d;
+    --link: #4ea1ff;
+    --rule: #38383a;
+    --bg: #1e1e1e;
+    --code-bg: #2a2a2a;
+    --accent: #5eb1ff;
+  }
+}
+
+html, body {
+  margin: 0; padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 15px/1.55 -apple-system, "SF Pro Text", system-ui, sans-serif;
+}
+main {
+  max-width: 760px;
+  margin: 32px auto;
+  padding: 0 28px 48px;
+}
+header.bread {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 14px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+h1 {
+  font: 600 28px/1.2 -apple-system, "SF Pro Display", system-ui, sans-serif;
+  margin: 0 0 4px;
+}
+h2 {
+  font: 600 19px/1.3 -apple-system, system-ui, sans-serif;
+  margin: 32px 0 8px;
+  padding-top: 6px;
+  border-top: 1px solid var(--rule);
+}
+h3 {
+  font: 600 15px/1.3 -apple-system, system-ui, sans-serif;
+  margin: 22px 0 6px;
+}
+p { margin: 10px 0; }
+.lede {
+  font-size: 16px;
+  color: var(--muted);
+  margin: 6px 0 18px;
+}
+a { color: var(--link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+code, pre, kbd {
+  font: 13px/1.5 "SF Mono", Menlo, Consolas, monospace;
+}
+code {
+  background: var(--code-bg);
+  padding: 1px 5px;
+  border-radius: 3px;
+}
+pre {
+  background: var(--code-bg);
+  padding: 12px 14px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+pre code { background: transparent; padding: 0; }
+kbd {
+  background: var(--code-bg);
+  border: 1px solid var(--rule);
+  border-bottom-width: 2px;
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+}
+ul, ol { padding-left: 24px; }
+li { margin: 4px 0; }
+blockquote {
+  border-left: 3px solid var(--accent);
+  margin: 14px 0;
+  padding: 4px 14px;
+  color: var(--muted);
+  background: var(--code-bg);
+  border-radius: 0 6px 6px 0;
+}
+hr {
+  border: 0;
+  border-top: 1px solid var(--rule);
+  margin: 28px 0;
+}
+table {
+  border-collapse: collapse;
+  margin: 14px 0;
+  width: 100%;
+  font-size: 14px;
+}
+th, td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+th { color: var(--muted); font-weight: 600; }
+
+.diataxis-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin: 22px 0;
+}
+.diataxis-grid .card {
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 14px 16px;
+}
+.diataxis-grid h3 { margin-top: 0; }
+.diataxis-grid p { color: var(--muted); margin: 6px 0 10px; font-size: 13px; }
+.diataxis-grid ul { margin: 0; padding-left: 18px; }
+
+footer.nav {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--muted);
+}
+footer.nav a { color: var(--link); }

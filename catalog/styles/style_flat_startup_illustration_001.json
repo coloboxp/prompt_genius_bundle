@@ -1,0 +1,40 @@
+{
+  "id": "style_flat_startup_illustration_001",
+  "type": "style_pattern",
+  "category": "flat_illustration",
+  "name": "Flat startup illustration",
+  "description": "Bright, simple, vector-flat illustration for product marketing pages and onboarding screens.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "flat startup-style vector illustration, bright colors, simple shapes, clean and professional design, no text"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "product",
+    "onboarding",
+    "saas"
+  ],
+  "avoid_with": [
+    "photorealistic",
+    "cinematic"
+  ],
+  "tags": [
+    "flat",
+    "vector",
+    "startup",
+    "illustration",
+    "marketing"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

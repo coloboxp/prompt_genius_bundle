@@ -1,0 +1,34 @@
+{
+  "id": "negative_avoid_warping_001",
+  "type": "negative_pattern",
+  "category": "video_artifact",
+  "name": "Avoid warping and morphing",
+  "description": "Video stability: prevent geometry drift, warping, morphing across frames.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "no geometry drift, no warping, no morphing, stable subject shape across all frames"
+  },
+  "parameters": {},
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "negative",
+    "warping",
+    "stability",
+    "video"
+  ],
+  "quality_score": 0.9,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

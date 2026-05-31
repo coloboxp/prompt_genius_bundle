@@ -1,0 +1,39 @@
+{
+  "id": "style_photorealistic_portrait_001",
+  "type": "style_pattern",
+  "category": "portrait_photography",
+  "name": "Photorealistic cinematic portrait",
+  "description": "Photorealistic portrait with shallow depth of field, natural skin tones, cinematic framing.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "photorealistic cinematic portrait photography, natural skin tones, shallow depth of field, deliberate cinematic framing, soft natural light"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "human",
+    "fashion",
+    "campaign"
+  ],
+  "avoid_with": [
+    "flat",
+    "icon"
+  ],
+  "tags": [
+    "portrait",
+    "photorealistic",
+    "cinematic",
+    "human"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

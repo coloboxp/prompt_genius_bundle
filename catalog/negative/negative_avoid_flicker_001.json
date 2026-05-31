@@ -1,0 +1,34 @@
+{
+  "id": "negative_avoid_flicker_001",
+  "type": "negative_pattern",
+  "category": "video_artifact",
+  "name": "Avoid flicker and unstable lighting",
+  "description": "Video stability: prevent flicker, exposure jumps, unstable lighting transitions.",
+  "applies_to": [
+    "text_to_video",
+    "image_to_video",
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "no flicker, no exposure jumps, stable lighting across all frames"
+  },
+  "parameters": {},
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "negative",
+    "flicker",
+    "stability",
+    "video"
+  ],
+  "quality_score": 0.88,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}

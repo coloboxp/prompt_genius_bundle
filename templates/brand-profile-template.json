@@ -1,0 +1,41 @@
+{
+  "id": "brand_profile_default_001",
+  "name": "Default internal brand profile",
+  "description": "Starter brand profile. Replace values with real internal brand rules.",
+  "tone": [
+    "trustworthy",
+    "clean",
+    "professional"
+  ],
+  "visual_style": [
+    "modern",
+    "minimal",
+    "premium"
+  ],
+  "color_palette": [
+    "deep blue",
+    "white",
+    "soft gray"
+  ],
+  "prefer": [
+    "clean layouts",
+    "human trust",
+    "clear product value",
+    "calm motion"
+  ],
+  "avoid": [
+    "cyberpunk",
+    "hacker visuals",
+    "dystopian surveillance mood",
+    "stock photo handshakes",
+    "fake UI text"
+  ],
+  "video_rules": [
+    "prefer slow and stable motion",
+    "avoid flicker",
+    "preserve product shape and layout",
+    "avoid excessive glow"
+  ],
+  "status": "draft",
+  "version": "1.0"
+}

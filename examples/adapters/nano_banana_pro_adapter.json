@@ -1,0 +1,40 @@
+{
+  "model_id": "nano_banana_pro",
+  "display_name": "Nano Banana Pro (Gemini Image)",
+  "adapter_status": "verified_from_corpus",
+  "supports": {
+    "static_image": true,
+    "image_editing": true,
+    "text_to_video": false,
+    "image_to_video": false,
+    "storyboard": false
+  },
+  "parameters": {
+    "aspect_ratio": {
+      "supported": true,
+      "syntax": "natural_language"
+    },
+    "negative_prompt": {
+      "supported": true,
+      "syntax": "trailing_avoid_sentence"
+    },
+    "reference_image": {
+      "supported": true,
+      "syntax": "natural_language_reference"
+    },
+    "duration_seconds": {
+      "supported": false
+    },
+    "camera_motion": {
+      "supported": false
+    },
+    "subject_motion": {
+      "supported": false
+    }
+  },
+  "prompt_style": "detailed_natural_language",
+  "negative_prompt_behavior": "append_avoid_sentence",
+  "unsupported_fields_behavior": "drop",
+  "language": "english_preferred",
+  "notes": "Use for static image and image editing prompts. Confirmed behavior from rows in raw_corpus/nano-banana-pro-prompts-20260324.csv. Reject any video-only fields before compiling."
+}

@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://internal.example/schemas/video-prompt.schema.json",
+  "title": "Prompt Genius Video Prompt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "mode",
+    "title",
+    "target_model",
+    "user_brief",
+    "creative_intent",
+    "video_parameters",
+    "prompt",
+    "negative_prompt",
+    "evaluation_criteria"
+  ],
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "mode": {
+      "type": "string",
+      "enum": [
+        "text_to_video",
+        "image_to_video"
+      ]
+    },
+    "title": {
+      "type": "string"
+    },
+    "target_model": {
+      "type": "string",
+      "description": "Adapter id for any video-capable model (e.g. seedance_2_0, runway, kling, sora, generic_video). Adapter must declare text_to_video or image_to_video support."
+    },
+    "user_brief": {
+      "type": "string"
+    },
+    "source_assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "role": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "creative_intent": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "video_parameters": {
+      "type": "object",
+      "required": [
+        "duration_seconds",
+        "aspect_ratio",
+        "camera_motion",
+        "pacing"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "duration_seconds": {
+          "type": "number",
+          "minimum": 1
+        },
+        "aspect_ratio": {
+          "type": "string"
+        },
+        "shot_count": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "camera_motion": {
+          "type": "string"
+        },
+        "subject_motion": {
+          "type": "string"
+        },
+        "lighting_motion": {
+          "type": "string"
+        },
+        "pacing": {
+          "type": "string"
+        },
+        "continuity": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "prompt": {
+      "type": "string"
+    },
+    "negative_prompt": {
+      "type": "string"
+    },
+    "evaluation_criteria": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

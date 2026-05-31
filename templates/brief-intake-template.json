@@ -1,0 +1,16 @@
+{
+  "mode": "static_image",
+  "target_model": "generic",
+  "brief": "",
+  "audience": "",
+  "use_case": "",
+  "desired_style": [],
+  "avoid": [],
+  "format": {
+    "aspect_ratio": "16:9",
+    "duration_seconds": null
+  },
+  "brand_profile_id": null,
+  "number_of_options": 5,
+  "risk_level": "balanced"
+}

@@ -1,0 +1,50 @@
+{
+  "id": "lighting_soft_studio_001",
+  "type": "lighting_pattern",
+  "category": "studio_lighting",
+  "name": "Soft studio lighting",
+  "description": "Useful for clean product visuals, enterprise campaigns, portraits, and hero images that need a polished but calm look.",
+  "applies_to": [
+    "static_image",
+    "text_to_video",
+    "image_to_video",
+    "product_render",
+    "campaign_visual"
+  ],
+  "not_recommended_for": [
+    "dark_noir_scene",
+    "raw_documentary",
+    "horror_scene"
+  ],
+  "prompt_fragments": {
+    "generic": "soft studio lighting, gentle highlights, clean shadows, polished product photography feel"
+  },
+  "parameters": {
+    "lighting": "soft studio",
+    "contrast": "medium-low",
+    "shadow_style": "clean soft shadows"
+  },
+  "compatible_with": [
+    "premium",
+    "clean",
+    "product",
+    "enterprise",
+    "trustworthy"
+  ],
+  "avoid_with": [
+    "harsh_flash",
+    "heavy_neon",
+    "dramatic_noir"
+  ],
+  "tags": [
+    "lighting",
+    "studio",
+    "soft",
+    "clean",
+    "premium"
+  ],
+  "quality_score": 0.84,
+  "status": "active",
+  "created_by": "starter_bundle",
+  "version": "1.0"
+}

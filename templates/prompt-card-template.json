@@ -1,0 +1,15 @@
+{
+  "id": "prompt_card_001",
+  "title": "",
+  "best_for": "",
+  "mode": "static_image",
+  "target_model": "generic",
+  "risk_level": "balanced",
+  "prompt": "",
+  "negative_prompt": "",
+  "settings": {},
+  "why_this_works": "",
+  "selected_patterns": [],
+  "editable_controls": {},
+  "json_ref": ""
+}

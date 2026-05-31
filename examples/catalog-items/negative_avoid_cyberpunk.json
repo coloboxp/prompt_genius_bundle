@@ -1,0 +1,54 @@
+{
+  "id": "negative_avoid_cyberpunk_001",
+  "type": "negative_pattern",
+  "category": "brand_safety_negative",
+  "name": "Avoid cyberpunk and surveillance feel",
+  "description": "Useful for identity, biometric, security, and enterprise visuals that should feel trustworthy rather than dystopian or hacker-like.",
+  "applies_to": [
+    "static_image",
+    "text_to_video",
+    "image_to_video",
+    "campaign_visual",
+    "product_video"
+  ],
+  "not_recommended_for": [
+    "intentional_cyberpunk_art",
+    "gaming_scene",
+    "sci_fi_campaign"
+  ],
+  "prompt_fragments": {
+    "generic": "avoid cyberpunk, hacker visuals, surveillance feeling, dystopian lighting, glitch effects, aggressive neon, dark sci-fi mood"
+  },
+  "parameters": {
+    "negative_terms": [
+      "cyberpunk",
+      "hacker",
+      "surveillance",
+      "dystopian",
+      "glitch",
+      "aggressive neon"
+    ]
+  },
+  "compatible_with": [
+    "enterprise",
+    "trust",
+    "identity",
+    "security",
+    "brand_safe"
+  ],
+  "avoid_with": [
+    "cyberpunk_style",
+    "sci_fi_hacker_scene"
+  ],
+  "tags": [
+    "negative",
+    "cyberpunk",
+    "hacker",
+    "surveillance",
+    "brand-safe"
+  ],
+  "quality_score": 0.91,
+  "status": "active",
+  "created_by": "starter_bundle",
+  "version": "1.0"
+}

@@ -1,0 +1,33 @@
+{
+  "id": "transition_soft_fade_001",
+  "type": "transition_pattern",
+  "category": "fade",
+  "name": "Soft fade",
+  "description": "Soft luminance fade between shots for calm pacing.",
+  "applies_to": [
+    "storyboard",
+    "keyframe"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "soft luminance fade between shots, calm pacing, no hard cut"
+  },
+  "parameters": {
+    "transition": "fade"
+  },
+  "compatible_with": [],
+  "avoid_with": [],
+  "tags": [
+    "transition",
+    "fade",
+    "calm"
+  ],
+  "quality_score": 0.72,
+  "status": "active",
+  "version": "0.1",
+  "notes": "synthesized from recurring patterns observed in raw_corpus/",
+  "source": {
+    "file": "raw_corpus/",
+    "method": "human-synthesis from recurring families"
+  }
+}
