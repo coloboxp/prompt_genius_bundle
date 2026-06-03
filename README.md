@@ -52,6 +52,8 @@ retrieval index warms, then you are in.
 
 Type a brief in the left panel. Pick mode and target. Hit Generate
 (⌘↩). Cards stream into the middle as the LLM finishes each one.
+Use **Try an example** to load a random real prompt from the bundled raw
+corpus for the current mode.
 
 ## Quick start (source)
 
@@ -64,6 +66,12 @@ prompt-genius generate --brief "..." --mode static_image --n 5   # CLI
 Python 3.11 or newer. Optional but recommended: install the `claude` or
 `codex` CLI on `PATH` so the proposer can call a real LLM. Without
 either, it falls back to a deterministic heuristic.
+
+macOS GUI note: Finder-launched apps do not inherit your shell `PATH`.
+Prompt Genius checks common Homebrew/npm locations and your login-shell
+path, but you can also set an absolute CLI path in **Edit > Preferences
+> LLM**. The same configured path is used for detection, generation, and
+refinement.
 
 ## What is inside
 
@@ -102,9 +110,18 @@ bash packaging/build_mac_app.sh    # ~3 min: makes dist/PromptGenius.app
 bash packaging/build_dmg.sh        # ~30 s: wraps it in dist/PromptGenius.dmg
 ```
 
+`build_mac_app.sh` builds from a fresh `.venv-build` by default so
+PyInstaller only sees this project's declared dependencies. Set
+`REUSE_BUILD_VENV=1` if you want to reuse that environment during local
+packaging iteration.
+
 The `.app` is fully self-contained (~950 MB): bundled torch (CPU),
 sentence-transformers model, pre-built indexes, catalog, adapters,
 templates, raw corpus, Apple Help Book.
+
+Bundled launches rebase read-only resource paths to the current app
+bundle. This keeps the app working after you run it from `dist/` and
+then drag the same app into `/Applications`.
 
 ## Docs
 

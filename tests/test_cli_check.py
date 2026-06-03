@@ -21,10 +21,26 @@ def test_unknown_backend_returns_false() -> None:
 
 
 def test_claude_detection_matches_path(monkeypatch) -> None:
-    import shutil as sh
-    monkeypatch.setattr(sh, "which", lambda name: "/fake/claude" if name == "claude" else None)
+    from prompt_genius.runtime import cli_resolver
+
+    monkeypatch.setattr(
+        cli_resolver,
+        "resolve_cli_binary",
+        lambda name: "/fake/claude" if name == "claude" else None,
+    )
     assert is_backend_installed("claude") is True
     assert is_backend_installed("codex") is False
+
+
+def test_detection_uses_configured_binary(monkeypatch) -> None:
+    from prompt_genius.runtime import cli_resolver
+
+    monkeypatch.setattr(
+        cli_resolver,
+        "resolve_cli_binary",
+        lambda name: "/custom/bin/codex" if name == "/custom/bin/codex" else None,
+    )
+    assert is_backend_installed("codex", codex_binary="/custom/bin/codex") is True
 
 
 def test_backend_meta_has_install_info() -> None:

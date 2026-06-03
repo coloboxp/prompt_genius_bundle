@@ -14,8 +14,9 @@ from prompt_genius.core.config import Config
 
 def test_heuristic_default_when_unknown_backend_auto(monkeypatch) -> None:
     # Pretend neither CLI is on PATH.
-    import shutil
-    monkeypatch.setattr(shutil, "which", lambda _name: None)
+    import prompt_genius.core.brief_parsers as parsers
+
+    monkeypatch.setattr(parsers, "resolve_cli_binary", lambda _name: None)
     parser = make_parser(backend="auto")
     assert isinstance(parser, HeuristicBriefParser)
 
@@ -37,9 +38,10 @@ def test_unknown_backend_raises() -> None:
 
 
 def test_cli_parser_falls_back_when_binary_missing(monkeypatch) -> None:
-    # Force shutil.which to return None so _run() short-circuits.
-    import shutil
-    monkeypatch.setattr(shutil, "which", lambda _name: None)
+    # Force CLI resolution to return None so _run() short-circuits.
+    import prompt_genius.core.brief_parsers as parsers
+
+    monkeypatch.setattr(parsers, "resolve_cli_binary", lambda _name: None)
     parser = ClaudeCliBriefParser(fallback=HeuristicBriefParser())
     intent = parser.parse("Premium enterprise hero image")
     assert intent.raw_brief == "Premium enterprise hero image"
@@ -51,4 +53,16 @@ def test_make_parser_from_config_returns_matching_type() -> None:
     cfg = Config.default()
     cfg.llm.backend = "codex"
     parser = make_parser_from_config(cfg.llm)
+    assert isinstance(parser, CodexCliBriefParser)
+
+
+def test_auto_uses_configured_binary(monkeypatch) -> None:
+    import prompt_genius.core.brief_parsers as parsers
+
+    monkeypatch.setattr(
+        parsers,
+        "resolve_cli_binary",
+        lambda name: "/custom/codex" if name == "/custom/codex" else None,
+    )
+    parser = make_parser(backend="auto", codex_binary="/custom/codex")
     assert isinstance(parser, CodexCliBriefParser)

@@ -14,12 +14,12 @@ prompt; if parsing fails the parser falls back to the heuristic.
 from __future__ import annotations
 
 import json
-import shutil
 import subprocess
 from dataclasses import dataclass
 from typing import Protocol
 
 from prompt_genius.core.brief import parse_brief as heuristic_parse_brief
+from prompt_genius.runtime.cli_resolver import cli_env, resolve_cli_binary
 from prompt_genius.core.models import Intent
 
 _SYSTEM_PROMPT = (
@@ -59,14 +59,15 @@ class _CliParserBase:
     prompt_as_arg: bool = False
 
     def _run(self, full_prompt: str) -> str | None:
-        if not shutil.which(self.binary):
+        resolved = resolve_cli_binary(self.binary)
+        if not resolved:
             return None
         try:
             if self.prompt_as_arg:
-                cmd = [self.binary, *self.args, full_prompt]
+                cmd = [resolved, *self.args, full_prompt]
                 stdin_input = None
             else:
-                cmd = [self.binary, *self.args]
+                cmd = [resolved, *self.args]
                 stdin_input = full_prompt
             result = subprocess.run(  # noqa: S603 — explicit binary lookup above
                 cmd,
@@ -75,6 +76,7 @@ class _CliParserBase:
                 text=True,
                 check=False,
                 timeout=self.timeout_seconds,
+                env=cli_env(),
             )
         except (subprocess.TimeoutExpired, OSError):
             return None
@@ -267,8 +269,8 @@ def make_parser(
         return _mlx()
     if backend != "auto":
         raise ValueError(f"Unknown brief parser backend: {backend!r}")
-    if shutil.which("claude"):
+    if resolve_cli_binary(claude_binary or "claude"):
         return _claude()
-    if shutil.which("codex"):
+    if resolve_cli_binary(codex_binary or "codex"):
         return _codex()
     return heuristic

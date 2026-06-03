@@ -321,7 +321,12 @@ class SettingsDialog(QDialog):
             QMessageBox.warning(self, "Invalid value", str(exc))
             return
         # Friendly missing-CLI guard before persisting.
-        if not _confirm_backend_available(self, new_config.llm.backend):
+        if not _confirm_backend_available(
+            self,
+            new_config.llm.backend,
+            claude_binary=new_config.llm.claude_binary,
+            codex_binary=new_config.llm.codex_binary,
+        ):
             return
         try:
             new_config.save(default_config_path())
@@ -523,7 +528,13 @@ def _pick_path(parent: QWidget, edit: QLineEdit, name: str) -> None:
 # --------------------------------------------------------- missing-CLI dialog
 
 
-def _confirm_backend_available(parent: QWidget, backend: str) -> bool:
+def _confirm_backend_available(
+    parent: QWidget,
+    backend: str,
+    *,
+    claude_binary: str = "claude",
+    codex_binary: str = "codex",
+) -> bool:
     """When the user picks an LLM backend that isn't installed, offer to open
     the install instructions. Returns True to proceed with save, False to stay
     in the dialog so they can change the backend.
@@ -534,7 +545,11 @@ def _confirm_backend_available(parent: QWidget, backend: str) -> bool:
 
     from prompt_genius.core.cli_check import backend_meta, is_backend_installed
 
-    if is_backend_installed(backend):
+    if is_backend_installed(
+        backend,
+        claude_binary=claude_binary,
+        codex_binary=codex_binary,
+    ):
         return True
     meta = backend_meta(backend)
     if not meta:

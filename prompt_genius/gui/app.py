@@ -10,6 +10,8 @@ All long-running work runs on a QThread worker; cancel + reactive UI throughout.
 from __future__ import annotations
 
 import json
+import random
+import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -64,7 +66,9 @@ from prompt_genius.core.versioning import save_version
 from prompt_genius.core.adapters import resolve_adapter
 from prompt_genius.core.catalog import load_catalog
 from prompt_genius.core.compiler import compile_prompt
+from prompt_genius.core.corpus import iter_rows
 from prompt_genius.core.models import StructuredPrompt, to_dict as _model_to_dict
+from prompt_genius.core.resources import resource_path
 from prompt_genius.gui.ingest_dialog import IngestDialog
 from prompt_genius.gui.json_editor import StructuredCardEditor, build_full_vocab
 from prompt_genius.gui.refine_dialog import RefineDialog
@@ -144,7 +148,8 @@ class MainWindow(QMainWindow):
     ) -> None:
         super().__init__()
         self.setWindowTitle("🦊 Prompt Genius")
-        self.resize(1480, 900)
+        self.resize(1680, 940)
+        self.setMinimumSize(1500, 900)
 
         self._config = config or load_or_init()
         # Resolve from config if not explicitly overridden
@@ -297,7 +302,11 @@ class MainWindow(QMainWindow):
             self._config.llm.backend if self._config.llm.backend in {"claude", "codex"} else "claude"
         )
         dialog = RefineDialog(
-            self, original_prompt=original_prompt, default_backend=default_backend,
+            self,
+            original_prompt=original_prompt,
+            default_backend=default_backend,
+            claude_binary=self._config.llm.claude_binary,
+            codex_binary=self._config.llm.codex_binary,
         )
         dialog.applied_new_card.connect(self._on_refined_apply_new)
         dialog.replaced_current.connect(self._on_refined_replace_current)
@@ -535,8 +544,9 @@ class MainWindow(QMainWindow):
         splitter.addWidget(self._build_left())
         splitter.addWidget(self._build_middle())
         splitter.addWidget(self._build_right())
-        # Initial pixel sizes give the right panel real room for the structured editor.
-        splitter.setSizes([380, 460, 640])
+        # Initial pixel sizes keep the left controls visible without scrolling
+        # while preserving enough room for card browsing and structured editing.
+        splitter.setSizes([480, 500, 700])
         splitter.setHandleWidth(6)
         splitter.setChildrenCollapsible(False)
         self.setCentralWidget(splitter)
@@ -545,10 +555,12 @@ class MainWindow(QMainWindow):
 
     def _build_left(self) -> QWidget:
         scroll = QScrollArea(self); scroll.setWidgetResizable(True)
+        scroll.setMinimumWidth(440)
         container = QWidget()
+        container.setMinimumWidth(420)
         layout = QVBoxLayout(container)
-        layout.setContentsMargins(16, 14, 16, 14)
-        layout.setSpacing(14)
+        layout.setContentsMargins(14, 10, 14, 10)
+        layout.setSpacing(8)
 
         brief_header = QHBoxLayout()
         brief_header.setSpacing(8)
@@ -562,7 +574,8 @@ class MainWindow(QMainWindow):
 
         self.brief_edit = QPlainTextEdit()
         self._update_brief_placeholder(self._config.gui.default_mode)
-        self.brief_edit.setMinimumHeight(140)
+        self.brief_edit.setMinimumHeight(118)
+        self.brief_edit.setMaximumHeight(132)
         self.brief_edit.setToolTip(
             "Describe the image or video you want — what, who, mood, lighting, "
             "constraints. Be specific; the engine pulls catalog items that match "
@@ -575,7 +588,7 @@ class MainWindow(QMainWindow):
         form.setLabelAlignment(Qt.AlignmentFlag.AlignRight)
         form.setFormAlignment(Qt.AlignmentFlag.AlignTop)
         form.setHorizontalSpacing(12)
-        form.setVerticalSpacing(10)
+        form.setVerticalSpacing(7)
         form.setFieldGrowthPolicy(QFormLayout.FieldGrowthPolicy.ExpandingFieldsGrow)
 
         self.mode_combo = QComboBox()
@@ -654,6 +667,7 @@ class MainWindow(QMainWindow):
         self.finetune_tabs = QTabWidget()
         self.finetune_tabs.addTab(self._build_finetune_image_tab(), "Image")
         self.finetune_tabs.addTab(self._build_finetune_video_tab(), "Video")
+        self.finetune_tabs.setMaximumHeight(300)
         layout.addWidget(self.finetune_tabs)
 
         # Action buttons
@@ -1009,7 +1023,12 @@ class MainWindow(QMainWindow):
         # Warn if the configured LLM backend isn't installed — silently falling
         # back to heuristic would confuse the user.
         from prompt_genius.gui.settings_dialog import _confirm_backend_available
-        if not _confirm_backend_available(self, self._config.llm.backend):
+        if not _confirm_backend_available(
+            self,
+            self._config.llm.backend,
+            claude_binary=self._config.llm.claude_binary,
+            codex_binary=self._config.llm.codex_binary,
+        ):
             return
 
         target = self.target_combo.currentData()
@@ -1452,10 +1471,44 @@ class MainWindow(QMainWindow):
 
     def _insert_example_brief(self) -> None:
         mode = self._current_mode()
-        example = _MODE_EXAMPLES.get(mode, "")
+        example = self._random_corpus_example(mode) or _MODE_EXAMPLES.get(mode, "")
         if example:
             self.brief_edit.setPlainText(example)
             self.brief_edit.setFocus()
+
+    def _random_corpus_example(self, mode: str) -> str:
+        """Return a random real prompt from the bundled raw corpus."""
+
+        corpus_dir = resource_path("raw_corpus")
+        wanted_sources = (
+            ("seedance",) if mode in {"text_to_video", "image_to_video", "storyboard", "keyframe"}
+            else ("nano", "grok")
+        )
+        chosen: str | None = None
+        seen = 0
+        for row in iter_rows(corpus_dir, min_length=80):
+            source = row.source_file.lower()
+            if wanted_sources and not any(token in source for token in wanted_sources):
+                continue
+            if row.language == "cjk":
+                continue
+            text = _naturalize_example_text(row.content)
+            if not text:
+                continue
+            seen += 1
+            if random.randrange(seen) == 0:
+                chosen = text
+        if chosen is None and wanted_sources:
+            seen = 0
+            for row in iter_rows(corpus_dir, min_length=80):
+                text = _naturalize_example_text(row.content)
+                if text and row.language != "cjk":
+                    seen += 1
+                    if random.randrange(seen) == 0:
+                        chosen = text
+        if not chosen:
+            return ""
+        return chosen[:2400].rstrip()
 
     def _on_history_open(self, item: QListWidgetItem) -> None:
         path = Path(item.data(Qt.ItemDataRole.UserRole))
@@ -1582,6 +1635,147 @@ def _form() -> tuple[QWidget, QFormLayout]:
     form = QFormLayout(widget)
     form.setLabelAlignment(Qt.AlignmentFlag.AlignRight)
     return widget, form
+
+
+_ARG_DEFAULT_RE = re.compile(
+    r"\{argument\s+[^{}]*?default=(?P<quote>['\"])(?P<default>.*?)(?P=quote)[^{}]*\}"
+)
+_ARG_DEFAULT_ESCAPED_RE = re.compile(
+    r"\{argument\s+[^{}]*?default=\\(?P<quote>['\"])(?P<default>.*?)(?<!\\)\\(?P=quote)[^{}]*\}"
+)
+
+
+def _naturalize_example_text(text: str) -> str:
+    """Convert raw corpus prompt text into a brief-editor-friendly example."""
+
+    text = (text or "").strip()
+    if not text:
+        return ""
+    cleaned = _clean_prompt_fragment(_normalize_jsonish_text(text))
+    data = None
+    for candidate in (text, cleaned):
+        try:
+            data = json.loads(candidate)
+            break
+        except json.JSONDecodeError:
+            continue
+    if data is None:
+        if _looks_like_jsonish(text):
+            fragments = _jsonish_prompt_fragments(cleaned)
+            if fragments:
+                return "\n\n".join(fragments)
+        return cleaned
+    if not isinstance(data, (dict, list)):
+        return _clean_prompt_fragment(str(data))
+    fragments = list(_json_prompt_fragments(data))
+    natural = "\n\n".join(fragment for fragment in fragments if fragment)
+    return natural or _clean_prompt_fragment(text)
+
+
+def _json_prompt_fragments(value: Any, *, label: str = "") -> list[str]:
+    if isinstance(value, dict):
+        fragments: list[str] = []
+        for key, child in value.items():
+            child_label = _humanize_json_key(str(key))
+            if isinstance(child, (dict, list)):
+                fragments.extend(_json_prompt_fragments(child, label=child_label))
+                continue
+            text = _clean_prompt_fragment(str(child))
+            if not text:
+                continue
+            fragments.append(f"{child_label}: {text}" if child_label else text)
+        return fragments
+    if isinstance(value, list):
+        fragments = []
+        for child in value:
+            fragments.extend(_json_prompt_fragments(child, label=label))
+        return fragments
+    text = _clean_prompt_fragment(str(value))
+    return [f"{label}: {text}" if label and text else text] if text else []
+
+
+def _humanize_json_key(key: str) -> str:
+    text = key.strip().replace("_", " ").replace("-", " ")
+    text = re.sub(r"\s+", " ", text)
+    return text[:1].upper() + text[1:] if text else ""
+
+
+def _clean_prompt_fragment(text: str) -> str:
+    text = re.sub(r"\{argument\s+([^{}]*)\}", _argument_block_replacement, text)
+    text = _ARG_DEFAULT_ESCAPED_RE.sub(lambda m: m.group("default"), text)
+    text = _ARG_DEFAULT_RE.sub(lambda m: m.group("default"), text)
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def _argument_block_replacement(match: re.Match[str]) -> str:
+    body = match.group(1)
+    default = re.search(r"default=\\?([\"'])(?P<value>.*?)(?<!\\)\\?\1", body)
+    if default:
+        return default.group("value")
+    name = re.search(r"name=\\?([\"'])(?P<value>.*?)(?<!\\)\\?\1", body)
+    if name:
+        return name.group("value")
+    return ""
+
+
+def _normalize_jsonish_text(text: str) -> str:
+    return (
+        text.replace("\u00a0", " ")
+        .replace("“", '"')
+        .replace("”", '"')
+        .replace("‘", "'")
+        .replace("’", "'")
+    )
+
+
+def _looks_like_jsonish(text: str) -> bool:
+    stripped = text.lstrip()
+    return (
+        stripped.startswith("{")
+        or (stripped.startswith("[") and stripped[:2] in {'[{', '["'})
+        or stripped.startswith(('":', '"album_', '"prompt_', '"scene_', "scene_"))
+        or '":' in stripped[:80]
+    )
+
+
+def _jsonish_prompt_fragments(text: str) -> list[str]:
+    fragments: list[str] = []
+    seen: set[str] = set()
+    pair_re = re.compile(
+        r'"(?P<key>[A-Za-z][A-Za-z0-9_ -]{1,60})"\s*:\s*'
+        r'(?P<value>"[^"]{3,800}"|true|false|null|-?\d+(?:\.\d+)?)'
+    )
+    for match in pair_re.finditer(text):
+        raw_value = match.group("value").strip()
+        if raw_value in {"true", "false", "null"}:
+            value = raw_value.capitalize()
+        elif raw_value.startswith('"') and raw_value.endswith('"'):
+            value = raw_value[1:-1]
+        else:
+            value = raw_value
+        value = _clean_prompt_fragment(value)
+        if not value:
+            continue
+        key = _humanize_json_key(match.group("key"))
+        fragment = f"{key}: {value}" if key else value
+        if fragment in seen:
+            continue
+        seen.add(fragment)
+        fragments.append(fragment)
+    if fragments:
+        return fragments
+
+    stripped = re.sub(r'^[\s{\[]+|[\s}\]]+$', "", text)
+    stripped = re.sub(r"[{}\\[\\]]+", " ", stripped)
+    stripped = re.sub(r'^\s*"\s*,?\s*\.?', "", stripped)
+    stripped = re.sub(r'"\s*:\s*"', ": ", stripped)
+    stripped = re.sub(r'"\s*:\s*', ": ", stripped)
+    stripped = stripped.replace('", "', "\n\n")
+    stripped = stripped.replace('",', "\n\n")
+    stripped = stripped.replace('"', "")
+    fallback = _clean_prompt_fragment(stripped)
+    return [fallback] if fallback else []
 
 
 def _structured_from_dict(data: dict, target: str) -> StructuredPrompt:

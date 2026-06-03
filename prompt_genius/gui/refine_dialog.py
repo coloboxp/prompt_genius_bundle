@@ -183,6 +183,8 @@ class RefineWorker(QThread):
         comments: str,
         backend: str,
         timeout_seconds: float,
+        claude_binary: str = "claude",
+        codex_binary: str = "codex",
     ) -> None:
         super().__init__(parent)
         self._image = image_source
@@ -190,6 +192,8 @@ class RefineWorker(QThread):
         self._comments = comments
         self._backend = backend
         self._timeout = timeout_seconds
+        self._claude_binary = claude_binary
+        self._codex_binary = codex_binary
         self._cancelled = False
 
     def cancel(self) -> None:
@@ -200,6 +204,8 @@ class RefineWorker(QThread):
             result = refine_prompt(
                 self._image, self._prompt, self._comments,
                 backend=self._backend, timeout_seconds=self._timeout,
+                claude_binary=self._claude_binary,
+                codex_binary=self._codex_binary,
             )
             if self._cancelled:
                 return
@@ -224,12 +230,16 @@ class RefineDialog(QDialog):
         *,
         original_prompt: str = "",
         default_backend: str = "claude",
+        claude_binary: str = "claude",
+        codex_binary: str = "codex",
     ) -> None:
         super().__init__(parent)
         self.setWindowTitle("Refine from feedback")
         self.resize(1100, 740)
         self._worker: RefineWorker | None = None
         self._last_result: RefineResult | None = None
+        self._claude_binary = claude_binary
+        self._codex_binary = codex_binary
 
         outer = QVBoxLayout(self)
         outer.setContentsMargins(16, 14, 16, 14)
@@ -359,6 +369,8 @@ class RefineDialog(QDialog):
         self._worker = RefineWorker(
             self, self.image_area.image_source(), prompt, comments,
             backend=backend, timeout_seconds=180.0,
+            claude_binary=self._claude_binary,
+            codex_binary=self._codex_binary,
         )
         self._worker.finished_ok.connect(self._on_done)
         self._worker.finished_err.connect(self._on_err)

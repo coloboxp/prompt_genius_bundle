@@ -228,9 +228,35 @@ def load_or_init(path: str | Path | None = None) -> Config:
 
     target = Path(path) if path else default_config_path()
     if target.exists():
-        return Config.load(target)
+        cfg = Config.load(target)
+        return _normalize_for_runtime(cfg)
     cfg = Config.default()
+    cfg = _normalize_for_runtime(cfg)
     cfg.save(target)
+    return cfg
+
+
+def _normalize_for_runtime(cfg: Config) -> Config:
+    """Repair runtime-sensitive paths after loading a persisted config.
+
+    Bundled apps can move after first launch, especially from ``dist/`` into
+    ``/Applications``. Read-only resource paths saved from the old bundle must
+    be rebound to the current bundle, while user-writable paths stay under the
+    platform data directory.
+    """
+
+    from prompt_genius.core.resources import is_bundled
+
+    if not is_bundled():
+        return cfg
+    cfg.paths.adapters_dir = _default_path("examples/adapters")
+    cfg.paths.catalog_dir = _default_path("catalog")
+    cfg.paths.schemas_dir = _default_path("schemas")
+    cfg.paths.templates_dir = _default_path("templates")
+    cfg.paths.history_dir = _default_path("history", writable=True)
+    cfg.paths.feedback_path = _default_path("feedback.jsonl", writable=True)
+    cfg.paths.usage_path = _default_path("usage.jsonl", writable=True)
+    cfg.paths.versions_path = _default_path("versions.jsonl", writable=True)
     return cfg
 
 

@@ -13,7 +13,6 @@ disk via its built-in file-reading tool.
 from __future__ import annotations
 
 import json
-import shutil
 import subprocess
 import tempfile
 from dataclasses import asdict, dataclass, field
@@ -21,6 +20,7 @@ from pathlib import Path
 from typing import Any
 
 from prompt_genius.core.brief_parsers import _safe_load_json
+from prompt_genius.runtime.cli_resolver import cli_env, resolve_cli_binary
 
 
 @dataclass(slots=True)
@@ -110,12 +110,13 @@ def _save_image_source(image_source: bytes | str | Path) -> tuple[Path, bool]:
 
 
 def _run_claude(
-    image_path: Path, payload: str, timeout_seconds: float
+    image_path: Path, payload: str, timeout_seconds: float, binary: str = "claude"
 ) -> tuple[int, str, str]:
-    if not shutil.which("claude"):
-        return 127, "", "claude CLI not on PATH"
+    resolved = resolve_cli_binary(binary)
+    if not resolved:
+        return 127, "", f"{binary} CLI not found"
     cmd = [
-        "claude",
+        resolved,
         "-p",
         "--add-dir", str(image_path.parent),     # allow the file dir
         "--allowedTools", "Read",                # let it open the image
@@ -125,6 +126,7 @@ def _run_claude(
     try:
         result = subprocess.run(                  # noqa: S603 — explicit binary
             cmd, capture_output=True, text=True, check=False, timeout=timeout_seconds,
+            env=cli_env(),
         )
     except subprocess.TimeoutExpired as exc:
         return 124, exc.stdout or "", "timed out"
@@ -132,15 +134,17 @@ def _run_claude(
 
 
 def _run_codex(
-    image_path: Path, payload: str, timeout_seconds: float
+    image_path: Path, payload: str, timeout_seconds: float, binary: str = "codex"
 ) -> tuple[int, str, str]:
-    if not shutil.which("codex"):
-        return 127, "", "codex CLI not on PATH"
+    resolved = resolve_cli_binary(binary)
+    if not resolved:
+        return 127, "", f"{binary} CLI not found"
     full = _SYSTEM_PROMPT + "\n\n" + payload
-    cmd = ["codex", "exec", full]
+    cmd = [resolved, "exec", full]
     try:
         result = subprocess.run(                  # noqa: S603
             cmd, capture_output=True, text=True, check=False, timeout=timeout_seconds,
+            env=cli_env(),
         )
     except subprocess.TimeoutExpired as exc:
         return 124, exc.stdout or "", "timed out"
@@ -160,6 +164,8 @@ def refine_prompt(
     *,
     backend: str = "claude",
     timeout_seconds: float = 180.0,
+    claude_binary: str = "claude",
+    codex_binary: str = "codex",
 ) -> RefineResult:
     """Critique an image+prompt with the LLM and return a refined prompt."""
 
@@ -180,7 +186,8 @@ def refine_prompt(
         # When no image was supplied the LLM still runs against prompt+comments.
         effective_path = image_path or Path("<no_image_provided>")
         payload = _build_user_payload(effective_path, original_prompt, comments)
-        rc, stdout, stderr = runner(effective_path, payload, timeout_seconds)
+        binary = claude_binary if backend == "claude" else codex_binary
+        rc, stdout, stderr = runner(effective_path, payload, timeout_seconds, binary)
         if rc != 0:
             raise RuntimeError(
                 f"{backend} exited {rc}. stderr (tail): {stderr.strip()[-400:]}"

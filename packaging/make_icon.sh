@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# Generate PromptGenius.icns from the splash artwork using mac-native iconutil.
+# Generate PromptGenius.icns from the app icon artwork using mac-native iconutil.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
 
-SRC="prompt_genius/gui/assets/splash.png"
+SRC="appicon.png"
 ICONSET="packaging/PromptGenius.iconset"
 OUT="packaging/PromptGenius.icns"
 

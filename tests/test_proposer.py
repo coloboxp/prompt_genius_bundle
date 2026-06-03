@@ -42,9 +42,26 @@ def test_heuristic_proposer_returns_n_proposals(catalog_dir: Path, adapters_dir:
 
 
 def test_make_proposer_from_config_defaults_heuristic_for_unknown_path(monkeypatch) -> None:
-    import shutil
-    monkeypatch.setattr(shutil, "which", lambda _name: None)
+    import prompt_genius.core.proposer as proposer_mod
+
+    monkeypatch.setattr(proposer_mod, "resolve_cli_binary", lambda _name: None)
     cfg = Config.default()
     cfg.llm.backend = "auto"
     proposer = make_proposer_from_config(cfg.llm)
     assert isinstance(proposer, HeuristicProposer)
+
+
+def test_make_proposer_auto_uses_configured_binary(monkeypatch) -> None:
+    import prompt_genius.core.proposer as proposer_mod
+    from prompt_genius.core.proposer import CodexCliProposer
+
+    monkeypatch.setattr(
+        proposer_mod,
+        "resolve_cli_binary",
+        lambda name: "/custom/codex" if name == "/custom/codex" else None,
+    )
+    cfg = Config.default()
+    cfg.llm.backend = "auto"
+    cfg.llm.codex_binary = "/custom/codex"
+    proposer = make_proposer_from_config(cfg.llm)
+    assert isinstance(proposer, CodexCliProposer)

@@ -7,6 +7,10 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+PYTHON="${PYTHON:-$ROOT/.venv-build/bin/python}"
+if [ ! -x "$PYTHON" ]; then
+  PYTHON="python3"
+fi
 
 APP="dist/PromptGenius.app"
 OUT="dist/PromptGenius.dmg"
@@ -17,16 +21,16 @@ if [ ! -d "$APP" ]; then
 fi
 
 echo "[1/4] dependencies"
-python3 -m pip install --quiet --user dmgbuild pillow
+"$PYTHON" -m pip install --quiet dmgbuild pillow
 
 echo "[2/4] render DMG backdrop"
-python3 packaging/make_dmg_background.py
+"$PYTHON" packaging/make_dmg_background.py
 
 echo "[3/4] build DMG"
 # Clean previous so dmgbuild doesn't refuse on an existing target.
 rm -f "$OUT"
 PG_ROOT="$ROOT" PG_APP="$APP" PG_DMG_OUTPUT="$OUT" \
-  python3 -m dmgbuild \
+  "$PYTHON" -m dmgbuild \
     -s packaging/dmg_settings.py \
     "🦊 Prompt Genius" \
     "$OUT"

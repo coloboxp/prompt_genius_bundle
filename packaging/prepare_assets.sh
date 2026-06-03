@@ -4,6 +4,7 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+PYTHON="${PYTHON:-python3}"
 
 MODEL_NAME="${MODEL_NAME:-all-MiniLM-L6-v2}"
 ASSETS_ROOT="packaging/assets"
@@ -15,7 +16,7 @@ if [[ -f "$MODEL_DIR/config.json" && "${REBUILD_ASSETS:-0}" != "1" ]]; then
 else
   echo "[prepare] downloading sentence-transformers/${MODEL_NAME}"
   mkdir -p "$MODEL_DIR"
-  python3 - <<PY
+  "$PYTHON" - <<PY
 import sys
 from pathlib import Path
 from sentence_transformers import SentenceTransformer
@@ -30,7 +31,7 @@ fi
 
 echo "[prepare] pre-building catalog dense embeddings + corpus index + vocab"
 mkdir -p "$CACHE_DIR/embeddings" "$CACHE_DIR/corpus" "$CACHE_DIR/vocab"
-python3 - <<PY
+"$PYTHON" - <<PY
 from prompt_genius.core.catalog import load_catalog
 from prompt_genius.core.corpus import load_or_build_corpus_index
 from prompt_genius.core.vocab import load_or_build_vocab

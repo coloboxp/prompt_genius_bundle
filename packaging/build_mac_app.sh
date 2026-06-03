@@ -4,26 +4,34 @@
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 cd "$ROOT"
+BUILD_VENV="${BUILD_VENV:-$ROOT/.venv-build}"
+
+if [[ "${REUSE_BUILD_VENV:-0}" != "1" ]]; then
+  rm -rf "$BUILD_VENV"
+fi
+
+python3 -m venv "$BUILD_VENV"
+PYTHON="$BUILD_VENV/bin/python"
+export PYTHON
 
 echo "[1/7] icon"
 bash packaging/make_icon.sh
 
-echo "[2/7] dependencies"
-python3 -m pip install --quiet --upgrade pyinstaller
-python3 -m pip install --quiet sentence-transformers huggingface_hub
-python3 -m pip install --quiet markdown python-toon
+echo "[2/7] clean build venv + dependencies"
+"$PYTHON" -m pip install --quiet --upgrade pip "setuptools<82" wheel
+"$PYTHON" -m pip install --quiet -e ".[all]" pyinstaller markdown
 
 echo "[3/7] prepare bundled assets (model + caches)"
 bash packaging/prepare_assets.sh
 
 echo "[4/7] build Apple Help Book"
-python3 packaging/build_help_book.py
+"$PYTHON" packaging/build_help_book.py
 
 echo "[5/7] clean previous build"
 rm -rf build/PromptGenius dist/PromptGenius dist/PromptGenius.app
 
 echo "[6/7] PyInstaller"
-python3 -m PyInstaller packaging/PromptGenius.spec --noconfirm --clean
+"$PYTHON" -m PyInstaller packaging/PromptGenius.spec --noconfirm --clean
 
 echo "[7/7] install Help Book under Contents/Resources/"
 # PyInstaller's macOS BUNDLE step cross-links Contents/Resources/ ↔

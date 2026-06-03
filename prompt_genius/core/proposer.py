@@ -18,7 +18,6 @@ prompt template. When no backend is available or the call fails, the determinist
 from __future__ import annotations
 
 import json
-import shutil
 import subprocess
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
@@ -27,6 +26,7 @@ from typing import Any, Callable, Protocol
 from prompt_genius.core.adapters import Adapter
 from prompt_genius.core.assembler import assemble
 from prompt_genius.core.brief_parsers import _safe_load_json
+from prompt_genius.runtime.cli_resolver import cli_env, resolve_cli_binary
 from prompt_genius.core.catalog import Catalog
 from prompt_genius.core.corpus import CorpusRow
 from prompt_genius.core.models import Intent, Match, StructuredPrompt
@@ -168,13 +168,14 @@ class _CliProposer:
         from prompt_genius.core import llm_trace
         import time as _time
 
-        if not shutil.which(self.binary):
+        resolved = resolve_cli_binary(self.binary)
+        if not resolved:
             return None
         if self.prompt_as_arg:
-            cmd = [self.binary, *self.args, full_prompt]
+            cmd = [resolved, *self.args, full_prompt]
             stdin_input = None
         else:
-            cmd = [self.binary, *self.args]
+            cmd = [resolved, *self.args]
             stdin_input = full_prompt
         t0 = _time.perf_counter()
         rc = -1
@@ -187,6 +188,7 @@ class _CliProposer:
                 text=True,
                 check=False,
                 timeout=self.timeout_seconds,
+                env=cli_env(),
             )
             rc = result.returncode
             stdout = result.stdout
@@ -195,7 +197,7 @@ class _CliProposer:
         finally:
             llm_trace.record(llm_trace.LlmCall(
                 backend=self.binary.rsplit("/", 1)[-1],
-                binary=self.binary,
+                binary=resolved or self.binary,
                 args=tuple(self.args),
                 direction=direction,
                 prompt=full_prompt,
@@ -237,7 +239,7 @@ class _CliProposer:
     ) -> list[ProposedCard]:
         """Fan out N parallel single-card LLM calls; stream each as it lands."""
 
-        if not shutil.which(self.binary):
+        if not resolve_cli_binary(self.binary):
             return self.fallback.propose(
                 intent=intent, adapter=adapter, catalog=catalog,
                 matches=matches, exemplars=exemplars, n=n, mode=mode,
@@ -414,12 +416,12 @@ def make_proposer_from_config(llm) -> CardProposer:
             hf_token=llm.hf_token or None,
         )
     if llm.backend == "auto":
-        if shutil.which("claude"):
+        if resolve_cli_binary(llm.claude_binary):
             return ClaudeCliProposer(
                 binary=llm.claude_binary, args=tuple(llm.claude_args),
                 timeout_seconds=llm.timeout_seconds,
             )
-        if shutil.which("codex"):
+        if resolve_cli_binary(llm.codex_binary):
             return CodexCliProposer(
                 binary=llm.codex_binary, args=tuple(llm.codex_args),
                 timeout_seconds=llm.timeout_seconds,

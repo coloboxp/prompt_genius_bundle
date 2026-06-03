@@ -15,7 +15,8 @@ First launch needs **Right-click → Open** because the bundle is ad-hoc signed.
 |---|---|---|
 | Python 3.12 + PySide6 + all deps | `Contents/MacOS/` + frameworks | runs without a Python install |
 | `catalog/`, `schemas/`, `examples/`, `raw_corpus/`, `templates/` | `Contents/Resources/` | read-only reference data |
-| Splash artwork | `Contents/Resources/prompt_genius/gui/assets/splash.png` | window splash + icon source |
+| App icon artwork | `appicon.png` → `packaging/PromptGenius.icns` | Dock/Finder app icon |
+| Splash artwork | `Contents/Resources/prompt_genius/gui/assets/splash.png` | launch splash, kept separate from the app icon |
 | sentence-transformers model (all-MiniLM-L6-v2, ~80MB) | `Contents/Resources/models/sentence-transformers/all-MiniLM-L6-v2/` | offline dense embeddings |
 | Pre-built catalog dense vectors | `Contents/Resources/.cache/embeddings/` | hot first launch |
 | Pre-built corpus BM25 index + vocab | `Contents/Resources/.cache/corpus/` + `.../vocab/` | hot first launch |
@@ -41,7 +42,7 @@ Source-tree runs (`prompt-genius-gui` from a `pip install -e .`) keep the existi
 ## Steps (if running anything manually)
 
 ```bash
-# Just the icon (PromptGenius.icns from splash.png)
+# Just the icon (PromptGenius.icns from appicon.png)
 bash packaging/make_icon.sh
 
 # Just the bundled assets (model + caches)

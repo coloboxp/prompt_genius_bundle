@@ -6,8 +6,7 @@ to install whatever they pick (instead of silently falling back to heuristic).
 
 from __future__ import annotations
 
-import shutil
-
+from prompt_genius.runtime.cli_resolver import cli_exists
 
 # Human-readable display name + install URL per backend id.
 _BACKENDS: dict[str, dict[str, str]] = {
@@ -32,15 +31,20 @@ _BACKENDS: dict[str, dict[str, str]] = {
 }
 
 
-def is_backend_installed(backend: str) -> bool:
+def is_backend_installed(
+    backend: str,
+    *,
+    claude_binary: str = "claude",
+    codex_binary: str = "codex",
+) -> bool:
     """Return True when the chosen LLM backend can actually run on this machine."""
 
     if backend in ("heuristic", "auto"):
         return True
     if backend == "claude":
-        return shutil.which("claude") is not None
+        return cli_exists(claude_binary)
     if backend == "codex":
-        return shutil.which("codex") is not None
+        return cli_exists(codex_binary)
     if backend == "mlx":
         try:
             import mlx_lm  # noqa: F401
