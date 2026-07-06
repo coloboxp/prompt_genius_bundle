@@ -46,6 +46,42 @@ def test_gui_window_launches_and_generates(catalog_dir: Path, adapters_dir: Path
     assert len(received[0]) == 2
 
 
+def test_copy_text_copies_visible_prompt(catalog_dir: Path, adapters_dir: Path) -> None:
+    os.environ.setdefault("QT_QPA_PLATFORM", "offscreen")
+    from PySide6.QtWidgets import QApplication, QListWidgetItem
+
+    from prompt_genius.core.config import Config
+    from prompt_genius.gui.app import MainWindow, _CARD_ID_ROLE
+
+    app = QApplication.instance() or QApplication([])
+    config = Config.default()
+    config.embeddings.prewarm_on_launch = False
+    window = MainWindow(config=config, adapters_dir=adapters_dir, catalog_dir=catalog_dir)
+    stale_card = {
+        "id": "card-1",
+        "title": "Internal card",
+        "target_model": "generic",
+        "risk_level": "safe",
+        "compiled": {
+            "text": "clean product render of a bottle",
+            "negative_text": "",
+            "parameters": {},
+            "warnings": [],
+        },
+        "selected_patterns": [],
+    }
+    window._cards = [stale_card]
+    item = QListWidgetItem("1. Portrait card")
+    item.setData(_CARD_ID_ROLE, "card-1")
+    window.cards_list.addItem(item)
+    window.cards_list.setCurrentRow(0)
+    window.prompt_view.setPlainText("photorealistic portrait of a woman with a tattoo")
+
+    window._on_copy_text()
+
+    assert app.clipboard().text() == "photorealistic portrait of a woman with a tattoo"
+
+
 def test_example_json_is_naturalized() -> None:
     from prompt_genius.gui.app import _naturalize_example_text
 

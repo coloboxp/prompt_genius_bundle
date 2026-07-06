@@ -7,7 +7,8 @@ from pathlib import Path
 
 from jsonschema import Draft202012Validator
 
-from prompt_genius.core.catalog import load_catalog
+from prompt_genius.core.brief import parse_brief
+from prompt_genius.core.catalog import load_catalog, search
 
 
 def test_catalog_loads(catalog_dir: Path) -> None:
@@ -50,3 +51,21 @@ def test_all_items_validate_against_schema(catalog_dir: Path, schemas_dir: Path)
         for err in validator.iter_errors(data):
             failures.append(f"{path.name}: {err.message}")
     assert not failures, "\n".join(failures)
+
+
+def test_portrait_search_stays_out_of_product_enterprise_lane(catalog_dir: Path) -> None:
+    catalog = load_catalog(catalog_dir, backend="tfidf", prefer_dense=False)
+    intent = parse_brief(
+        "A fashion portrait of a woman model with a nose piercing and shoulder "
+        "tattoo, natural studio light, 85mm lens, editorial portrait photography."
+    )
+
+    matches = search(catalog, intent, "static_image", allow_drafts=True, per_type_limit=10)
+    ids = {match.item.id for bucket in matches.values() for match in bucket}
+
+    assert "task_human_portrait_001" in ids
+    assert "task_product_render_001" not in ids
+    assert "task_landing_hero_image_001" not in ids
+    assert "negative_avoid_cyberpunk_001" not in ids
+    assert "style_eco_luxury_product_001" not in ids
+    assert "camera_lens_macro_product_001" not in ids

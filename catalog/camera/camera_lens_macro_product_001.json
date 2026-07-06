@@ -22,7 +22,19 @@
     "jewelry"
   ],
   "avoid_with": [
-    "wide_environment"
+    "wide_environment",
+    "portrait",
+    "human",
+    "person",
+    "people",
+    "woman",
+    "man",
+    "girl",
+    "boy",
+    "fashion",
+    "editorial",
+    "tattoo",
+    "piercing"
   ],
   "tags": [
     "lens",

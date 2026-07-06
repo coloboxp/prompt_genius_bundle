@@ -136,6 +136,7 @@ _RATING_LABELS = {
     "motion_too_boring": "motion too boring",
     "video_likely_unstable": "video likely unstable",
 }
+_CARD_ID_ROLE = Qt.ItemDataRole.UserRole + 10
 
 
 class MainWindow(QMainWindow):
@@ -290,9 +291,8 @@ class MainWindow(QMainWindow):
         """Open the image-critique dialog; pre-fill with the currently selected card."""
 
         original_prompt = ""
-        row = self.cards_list.currentRow()
-        if 0 <= row < len(self._cards):
-            card = self._cards[row]
+        card = self._current_card()
+        if card is not None:
             compiled = card.get("compiled")
             if isinstance(compiled, list):
                 original_prompt = (compiled[0] or {}).get("text", "") if compiled else ""
@@ -323,11 +323,11 @@ class MainWindow(QMainWindow):
     def _on_refined_replace_current(self, refined_prompt: str) -> None:
         """Overwrite the selected card's compiled text with the refined prompt."""
 
-        row = self.cards_list.currentRow()
-        if not (0 <= row < len(self._cards)):
+        index = self._current_card_index()
+        if index is None:
             self._on_refined_apply_new(refined_prompt)
             return
-        card = self._cards[row]
+        card = self._cards[index]
         compiled = card.get("compiled")
         if isinstance(compiled, list) and compiled:
             compiled[0]["text"] = refined_prompt
@@ -335,7 +335,7 @@ class MainWindow(QMainWindow):
             compiled["text"] = refined_prompt
         else:
             card["compiled"] = {"text": refined_prompt, "negative_text": "", "parameters": {}, "warnings": []}
-        self._cards[row] = card
+        self._cards[index] = card
         self.prompt_view.setPlainText(self._render_card(card))
         self.card_editor.set_card(card)
         self.statusBar().showMessage("Card updated with the refined prompt.", 8000)
@@ -1116,6 +1116,7 @@ class MainWindow(QMainWindow):
         risk = card.get("risk_level", "")
         label = f"{index}. {title}\n{preview}\n  · {target}  · risk: {risk}"
         item = QListWidgetItem(label)
+        item.setData(_CARD_ID_ROLE, card.get("id"))
         item.setToolTip(card.get("why_this_works", ""))
         self.cards_list.addItem(item)
         if index == 1:
@@ -1188,13 +1189,32 @@ class MainWindow(QMainWindow):
             "</table>",
         )
 
+    def _card_index_for_row(self, row: int) -> int | None:
+        if row < 0:
+            return None
+        item = self.cards_list.item(row)
+        card_id = item.data(_CARD_ID_ROLE) if item is not None else None
+        if card_id:
+            for index, card in enumerate(self._cards):
+                if card.get("id") == card_id:
+                    return index
+        return row if row < len(self._cards) else None
+
+    def _current_card_index(self) -> int | None:
+        return self._card_index_for_row(self.cards_list.currentRow())
+
+    def _current_card(self) -> dict[str, Any] | None:
+        index = self._current_card_index()
+        return self._cards[index] if index is not None else None
+
     def _on_select_card(self, row: int) -> None:
-        if row < 0 or row >= len(self._cards):
+        index = self._card_index_for_row(row)
+        if index is None:
             self.prompt_view.clear()
             self.card_editor.set_card(None)
             self.brandfit_label.setText("brand-fit: —"); self.why_label.setText("")
             return
-        card = self._cards[row]
+        card = self._cards[index]
         self.prompt_view.setPlainText(self._render_card(card))
         # Keep the editor's catalog in sync (its delegate vocab depends on it).
         self.card_editor.set_catalog(self._catalog_for_editor())
@@ -1245,11 +1265,16 @@ class MainWindow(QMainWindow):
     def _on_card_edited(self, new_card: dict[str, Any]) -> None:
         """Recompile the prompt text from the edited structured fields."""
 
-        row = self.cards_list.currentRow()
-        if row < 0 or row >= len(self._cards):
+        index = None
+        card_id = new_card.get("id")
+        if card_id:
+            index = next((i for i, card in enumerate(self._cards) if card.get("id") == card_id), None)
+        if index is None:
+            index = self._current_card_index()
+        if index is None:
             return
         # Persist edits back into the in-memory card list.
-        self._cards[row] = new_card
+        self._cards[index] = new_card
         # Attempt a live recompile so the prompt text reflects the edit.
         try:
             adapters = load_adapters(self._adapters_dir)
@@ -1278,25 +1303,29 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage("Recompiled from your edits.", 6000)
 
     def _on_copy_text(self) -> None:
-        row = self.cards_list.currentRow()
-        if row < 0 or row >= len(self._cards):
+        text = self.prompt_view.toPlainText()
+        if not text:
+            card = self._current_card()
+            if card is None:
+                return
+            text = self._render_card(card)
+        if not text:
             return
-        QApplication.clipboard().setText(self._render_card(self._cards[row]))
+        QApplication.clipboard().setText(text)
         self.statusBar().showMessage("Copied prompt text.", 6000)
 
     def _on_copy_json(self) -> None:
-        row = self.cards_list.currentRow()
-        if row < 0 or row >= len(self._cards):
+        card = self._current_card()
+        if card is None:
             return
-        payload = json.dumps(self._cards[row], indent=2, ensure_ascii=False)
+        payload = json.dumps(card, indent=2, ensure_ascii=False)
         QApplication.clipboard().setText(payload)
         self.statusBar().showMessage("Copied card JSON.", 6000)
 
     def _on_copy_toon(self) -> None:
-        row = self.cards_list.currentRow()
-        if row < 0 or row >= len(self._cards):
+        card = self._current_card()
+        if card is None:
             return
-        card = self._cards[row]
         try:
             from toon import encode as toon_encode
         except ImportError:
@@ -1319,11 +1348,10 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage("Copied card as TOON.", 6000)
 
     def _on_save_card(self) -> None:
-        row = self.cards_list.currentRow()
-        if row < 0 or row >= len(self._cards):
+        card = self._current_card()
+        if card is None:
             QMessageBox.information(self, "Save", "Select a card first.")
             return
-        card = self._cards[row]
         path = save_card(card, self._config.paths.history_dir)
         record_usage(
             card.get("selected_patterns") or [],
@@ -1335,16 +1363,15 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(f"Saved to {path}.", 8000)
 
     def _on_snapshot(self) -> None:
-        row = self.cards_list.currentRow()
-        if row < 0 or row >= len(self._cards):
+        card = self._current_card()
+        if card is None:
             return
-        card = self._cards[row]
         path = save_version(card, self._config.paths.versions_path, change_summary="GUI snapshot")
         self.statusBar().showMessage(f"Snapshot → {path}.", 3500)
 
     def _on_export(self) -> None:
-        row = self.cards_list.currentRow()
-        if row < 0 or row >= len(self._cards):
+        card = self._current_card()
+        if card is None:
             QMessageBox.information(self, "Export", "Select a card first.")
             return
         path, _ = QFileDialog.getSaveFileName(
@@ -1361,9 +1388,8 @@ class MainWindow(QMainWindow):
             fmt = "markdown"
         else:
             fmt = "plain"
-        _suffix, text = export_card(self._cards[row], fmt)
+        _suffix, text = export_card(card, fmt)
         Path(path).write_text(text, encoding="utf-8")
-        card = self._cards[row]
         try:
             record_usage(
                 card.get("selected_patterns") or [],
@@ -1376,11 +1402,10 @@ class MainWindow(QMainWindow):
         self.statusBar().showMessage(f"Exported → {path}.", 8000)
 
     def _on_feedback(self) -> None:
-        row = self.cards_list.currentRow()
-        if row < 0 or row >= len(self._cards):
+        card = self._current_card()
+        if card is None:
             QMessageBox.information(self, "Feedback", "Select a card first.")
             return
-        card = self._cards[row]
         save_feedback(
             {
                 "card_id": card.get("id"),
@@ -1394,9 +1419,10 @@ class MainWindow(QMainWindow):
 
     def _on_card_context_menu(self, position) -> None:
         row = self.cards_list.indexAt(position).row()
-        if row < 0 or row >= len(self._cards):
+        index = self._card_index_for_row(row)
+        if index is None:
             return
-        card = self._cards[row]
+        card = self._cards[index]
         menu = QMenu(self)
         regen = menu.addAction("Regenerate this card")
         more_like = menu.addAction("More like this")
@@ -1420,7 +1446,7 @@ class MainWindow(QMainWindow):
             self.cards_list.setCurrentRow(row)
             self._on_export()
         elif chosen == discard:
-            self._cards.pop(row)
+            self._cards.pop(index)
             self.cards_list.takeItem(row)
         elif chosen == regen:
             # Re-run with same brief + mode, n=1, append the result.
@@ -1520,10 +1546,9 @@ class MainWindow(QMainWindow):
             return
         if card not in self._cards:
             self._cards.insert(0, card)
-            self.cards_list.insertItem(
-                0,
-                QListWidgetItem(f"(history)  {card.get('title', '(untitled)')}"),
-            )
+            item = QListWidgetItem(f"(history)  {card.get('title', '(untitled)')}")
+            item.setData(_CARD_ID_ROLE, card.get("id"))
+            self.cards_list.insertItem(0, item)
             self.cards_list.setCurrentRow(0)
             self.tabs.setCurrentIndex(0)
 

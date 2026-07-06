@@ -18,7 +18,20 @@
     "beauty",
     "wellness"
   ],
-  "avoid_with": [],
+  "avoid_with": [
+    "portrait",
+    "human",
+    "person",
+    "people",
+    "woman",
+    "man",
+    "girl",
+    "boy",
+    "fashion",
+    "editorial",
+    "tattoo",
+    "piercing"
+  ],
   "tags": [
     "product",
     "eco",

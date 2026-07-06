@@ -15,12 +15,29 @@
     "generic": "no extra fingers, no distorted hands, no malformed limbs, anatomically correct"
   },
   "parameters": {},
-  "compatible_with": [],
+  "compatible_with": [
+    "human",
+    "person",
+    "people",
+    "woman",
+    "man",
+    "girl",
+    "boy",
+    "portrait",
+    "fashion",
+    "hands",
+    "body"
+  ],
   "avoid_with": [],
   "tags": [
     "negative",
     "anatomy",
-    "hands"
+    "hands",
+    "body",
+    "human",
+    "portrait",
+    "person",
+    "people"
   ],
   "quality_score": 0.85,
   "status": "active",

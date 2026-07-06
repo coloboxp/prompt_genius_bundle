@@ -13,3 +13,9 @@
 
 - Add a small Preferences action that shows the resolved `claude` and `codex`
   paths, so users can see exactly what the GUI will execute.
+
+## Catalog Coverage
+
+- Add more reviewed human portrait, fashion, lifestyle, and editorial catalog
+  entries so five-card portrait runs can stay varied without borrowing product
+  or enterprise visual language.

@@ -1,0 +1,65 @@
+{
+  "id": "task_human_portrait_001",
+  "type": "task_template",
+  "category": "human_portrait",
+  "name": "Human portrait",
+  "description": "Human portrait or fashion/lifestyle model photography with attention to face, styling, pose, and distinctive personal details.",
+  "applies_to": [
+    "static_image",
+    "image_editing"
+  ],
+  "not_recommended_for": [],
+  "prompt_fragments": {
+    "generic": "human portrait photography, focus on facial identity, styling, pose, and distinctive personal details, natural believable skin and body details"
+  },
+  "parameters": {},
+  "compatible_with": [
+    "portrait",
+    "human",
+    "person",
+    "people",
+    "woman",
+    "man",
+    "girl",
+    "boy",
+    "female",
+    "male",
+    "fashion",
+    "lifestyle",
+    "editorial",
+    "tattoo",
+    "piercing"
+  ],
+  "avoid_with": [
+    "product",
+    "render",
+    "bottle",
+    "packaging"
+  ],
+  "tags": [
+    "task",
+    "portrait",
+    "human",
+    "person",
+    "people",
+    "woman",
+    "man",
+    "girl",
+    "boy",
+    "female",
+    "male",
+    "fashion",
+    "lifestyle",
+    "editorial",
+    "tattoo",
+    "piercing"
+  ],
+  "quality_score": 0.82,
+  "status": "active",
+  "version": "0.1",
+  "notes": "Portrait/lifestyle coverage so non-product human briefs do not fall back to product or enterprise tasks.",
+  "source": {
+    "file": "catalog/tasks/task_human_portrait_001.json",
+    "method": "human-curated"
+  }
+}

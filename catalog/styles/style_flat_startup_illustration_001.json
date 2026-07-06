@@ -20,7 +20,19 @@
   ],
   "avoid_with": [
     "photorealistic",
-    "cinematic"
+    "cinematic",
+    "portrait",
+    "human",
+    "person",
+    "people",
+    "woman",
+    "man",
+    "girl",
+    "boy",
+    "fashion",
+    "editorial",
+    "tattoo",
+    "piercing"
   ],
   "tags": [
     "flat",

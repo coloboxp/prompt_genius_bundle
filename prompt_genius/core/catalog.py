@@ -111,10 +111,23 @@ def load_catalog(
 
 
 _TOKEN_RE = re.compile(r"[a-z0-9]+")
+_STOPWORDS: frozenset[str] = frozenset(
+    {
+        "a", "an", "and", "are", "as", "at", "be", "by", "for", "from",
+        "has", "have", "in", "into", "is", "it", "its", "of", "on", "or",
+        "that", "the", "their", "this", "those", "to", "with", "without",
+        "image", "visual", "photo",
+        # Ambiguous in this product: usually means an AI model in catalog
+        # metadata, but a human fashion model in user briefs.
+        "model",
+    }
+)
+_STRICT_EVIDENCE_TYPES: frozenset[str] = frozenset({"task_template", "negative_pattern"})
+_EMBED_REASON_PREFIX = "embed cosine:"
 
 
 def _tokens(text: str) -> set[str]:
-    return set(_TOKEN_RE.findall((text or "").lower()))
+    return {token for token in _TOKEN_RE.findall((text or "").lower()) if token not in _STOPWORDS}
 
 
 def _intent_tokens(intent: Intent) -> set[str]:
@@ -185,6 +198,10 @@ def _passes_status_filter(item: CatalogItem, allow_drafts: bool) -> bool:
     if item.status not in _ACTIVE_DEFAULT_STATUSES and not allow_drafts:
         return False
     return True
+
+
+def _has_non_embedding_evidence(reasons: list[str]) -> bool:
+    return any(not reason.startswith(_EMBED_REASON_PREFIX) for reason in reasons)
 
 
 def search(
@@ -263,7 +280,11 @@ def search(
                 score += weights.brand_boost_weight * len(brand_hits)
                 reasons.append(f"brand boost: {sorted(brand_hits)}")
 
-        if score <= 0 and not reasons:
+        if not reasons:
+            continue
+        if item.type in _STRICT_EVIDENCE_TYPES and not _has_non_embedding_evidence(reasons):
+            continue
+        if score <= 0:
             continue
         by_type[item.type].append(Match(item=item, score=score, reasons=reasons))
 

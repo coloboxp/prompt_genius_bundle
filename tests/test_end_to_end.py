@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from prompt_genius.core.config import Config
 from prompt_genius.core.generate import generate_cards
 
 
@@ -84,3 +85,34 @@ def test_generate_keyframe_returns_start_keyframe_end(
     assert isinstance(structured, list)
     roles = [s.frame_role for s in structured]
     assert roles[0] == "start" and roles[-1] == "end"
+
+
+def test_generate_portrait_avoids_product_enterprise_patterns(
+    catalog_dir: Path, adapters_dir: Path
+) -> None:
+    cfg = Config.default()
+    cfg.embeddings.backend = "tfidf"
+    cfg.embeddings.prefer_dense = False
+    cards = generate_cards(
+        "A fashion portrait of a woman model with a nose piercing and shoulder "
+        "tattoo, natural studio light, 85mm lens, editorial portrait photography.",
+        mode="static_image",
+        target_model=None,
+        n=5,
+        adapters_dir=adapters_dir,
+        catalog_dir=catalog_dir,
+        allow_drafts=True,
+        config=cfg,
+        usage_ledger=None,
+    )
+
+    bad_patterns = {
+        "task_product_render_001",
+        "task_landing_hero_image_001",
+        "negative_avoid_cyberpunk_001",
+        "style_eco_luxury_product_001",
+        "camera_lens_macro_product_001",
+    }
+    for card in cards:
+        assert "task_human_portrait_001" in card.selected_patterns
+        assert bad_patterns.isdisjoint(card.selected_patterns)

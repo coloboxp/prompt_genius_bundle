@@ -54,6 +54,8 @@ Type a brief in the left panel. Pick mode and target. Hit Generate
 (⌘↩). Cards stream into the middle as the LLM finishes each one.
 Use **Try an example** to load a random real prompt from the bundled raw
 corpus for the current mode.
+Use **Copy text** to copy the currently visible compiled prompt exactly;
+JSON and TOON copy the selected card structure for debugging or reuse.
 
 ## Quick start (source)
 
@@ -139,6 +141,9 @@ In the app: **Help > 🦊 Prompt Genius Help** (⌘?) opens the help in
 macOS Help Viewer with full-text search.
 
 ## Credits
+
+- Product direction, workflow design and QA: N.G. (НГ) 🇺🇦
+- Development: [@coloboxp](https://github.com/coloboxp)
 
 The reference corpus under `raw_corpus/` comes from
 [youmind.com](https://youmind.com) via the
